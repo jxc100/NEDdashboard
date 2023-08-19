@@ -1,0 +1,31 @@
+,subject,topic,pillar
+0,envhealth,basic_needs,i. Place-based Conditions
+1,foodhealth,basic_needs,i. Place-based Conditions
+2,housing,basic_needs,i. Place-based Conditions
+3,transport,basic_needs,i. Place-based Conditions
+4,secondary,access,i. Place-based Conditions
+5,innovcreation,access,i. Place-based Conditions
+6,skillbuilding,access,i. Place-based Conditions
+7,educattain,eductalent,i. Human and Social capital
+8,schooling,eductalent,i. Human and Social capital
+9,oppyouth,eductalent,i. Human and Social capital
+10,socialnet,socialcapital,i. Human and Social capital
+11,socialcohesion,socialcapital,i. Human and Social capital
+12,size,growthprosp,i. Economic Activity
+13,stdliving,growthprosp,i. Economic Activity
+14,prod,growthprosp,i. Economic Activity
+15,jobs,labormarket,i. Economic Activity
+16,emp,labormarket,i. Economic Activity
+17,u,labormarket,i. Economic Activity
+18,lf,labormarket,i. Economic Activity
+19,earn,labormarket,i. Economic Activity
+20,hhinc,income,i. Economic Activity
+21,poverty,income,i. Economic Activity
+22,assistance,income,i. Economic Activity
+23,incineq,income,i. Economic Activity
+24,homeown,wealth,i. Economic Activity
+25,bank,wealth,i. Economic Activity
+26,finresil,wealth,i. Economic Activity
+27,patents,busenv,i. Economic Activity
+28,bus,busenv,i. Economic Activity
+29,smallbusloan,busenv,i. Economic Activity
