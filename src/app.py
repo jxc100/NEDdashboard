@@ -3,8 +3,8 @@ from dash import html, dcc, Dash
 import dash_bootstrap_components as dbc
 import base64
 
-
-location = '/Users/ali/Desktop/Projects/Dashboard/Website/src'
+#location = '/Users/ali/Desktop/Projects/Dashboard/Website/src'
+location = './src'
 #Users/ali/ for personal, Users/aconway/ for work
 
 app = Dash(__name__, use_pages = True, external_stylesheets=[dbc.themes.LUX])

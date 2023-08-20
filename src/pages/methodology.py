@@ -6,7 +6,8 @@ import plotly.graph_objects as go
 import plotly_express as px
 
 
-location = '/Users/ali/Desktop/Projects/Dashboard/Website/src'
+location = './src'
+#location = '/Users/ali/Desktop/Projects/Dashboard/Website/src'
 #Users/ali/ for personal, Users/aconway/ for work
 
 

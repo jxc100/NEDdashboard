@@ -18,14 +18,14 @@ with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-c
     counties = json.load(response)
 
 from sklearn.preprocessing import MinMaxScaler
-from sklearn.svm import SVR
 #========================================
 
 
 #========================================INPUTING AND CLEANING THE DATA
 # Layers
 
-location = '/Users/ali/Desktop/Projects/Dashboard/Website/src'
+location = './src'
+#location = '/Users/ali/Desktop/Projects/Dashboard/Website/src'
 #Users/ali/ for personal, Users/aconway/ for work
 
 df_p = pd.read_excel(f'{location}/assets/CA_county_data.xlsx', sheet_name='PLACE', header=9,
