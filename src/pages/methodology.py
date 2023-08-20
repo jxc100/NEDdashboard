@@ -4,9 +4,10 @@ from dash import html, dcc
 import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
 import plotly_express as px
+import pathlib
 
-
-location = './src'
+location = pathlib.Path(__file__).parent.parent
+#location = './src'
 #location = '/Users/ali/Desktop/Projects/Dashboard/Website/src'
 #Users/ali/ for personal, Users/aconway/ for work
 

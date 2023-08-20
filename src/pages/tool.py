@@ -8,11 +8,11 @@ import plotly.graph_objects as go
 from dash import Dash, dcc, html, Input, Output, State, callback
 import dash
 import dash_bootstrap_components as dbc
-
+import os
 import numpy as np
 from urllib.request import urlopen
 import json
-
+import pathlib
 
 with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
     counties = json.load(response)
@@ -24,7 +24,8 @@ from sklearn.preprocessing import MinMaxScaler
 #========================================INPUTING AND CLEANING THE DATA
 # Layers
 
-location = './src'
+location = pathlib.Path(__file__).parent.parent
+#location = './src'
 #location = '/Users/ali/Desktop/Projects/Dashboard/Website/src'
 #Users/ali/ for personal, Users/aconway/ for work
 

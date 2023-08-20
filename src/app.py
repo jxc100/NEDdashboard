@@ -2,9 +2,12 @@ import dash
 from dash import html, dcc, Dash
 import dash_bootstrap_components as dbc
 import base64
+import pathlib
 
+#important code: source /Users/ali/Dropbox/Dashboard/Python_normAggregation/venv-3.11/bin/activate
+location = pathlib.Path(__file__).parent
 #location = '/Users/ali/Desktop/Projects/Dashboard/Website/src'
-location = './src'
+#location = './src'
 #Users/ali/ for personal, Users/aconway/ for work
 
 app = Dash(__name__, use_pages = True, external_stylesheets=[dbc.themes.LUX])
