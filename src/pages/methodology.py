@@ -27,7 +27,6 @@ dash.register_page(
 df_treemap = pd.read_csv(f'{location}/assets/df_treemap.csv')
 df_treemap = df_treemap.drop('Unnamed: 0', axis=1)
 
-
 #-----------------------------------------------------------------------------------------------------------------------
 # Build components
 #print(df_treemap.head())

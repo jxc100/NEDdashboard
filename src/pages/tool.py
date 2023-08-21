@@ -3,21 +3,18 @@
 import json
 import pandas as pd
 import plotly.express as px
-import base64
 import plotly.graph_objects as go
 from dash import Dash, dcc, html, Input, Output, State, callback
 import dash
 import dash_bootstrap_components as dbc
-import os
 import numpy as np
 from urllib.request import urlopen
 import json
 import pathlib
+from sklearn.preprocessing import MinMaxScaler
 
 with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
     counties = json.load(response)
-
-from sklearn.preprocessing import MinMaxScaler
 #========================================
 
 
@@ -25,21 +22,10 @@ from sklearn.preprocessing import MinMaxScaler
 # Layers
 
 location = pathlib.Path(__file__).parent.parent
-#location = './src'
-#location = '/Users/ali/Desktop/Projects/Dashboard/Website/src'
-#Users/ali/ for personal, Users/aconway/ for work
 
-df_p = pd.read_excel(f'{location}/assets/CA_county_data.xlsx', sheet_name='PLACE', header=9,
-                     dtype={"fips": str})
-df_p = df_p.drop(columns=['neigh_seg', 'Concentration of training providers'])
-
-df_hsc = pd.read_excel(f'{location}/assets/CA_county_data.xlsx', sheet_name='HUM CAP', header=9,
-                      dtype={"fips": str})
-df_hsc = df_hsc.drop(columns=['Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', 'Unnamed: 24'])
-
-df_e = pd.read_excel(f'{location}/assets/CA_county_data.xlsx', sheet_name='ECON DEV', header=9,
-                     dtype={"fips": str})
-df_e = df_e.drop(columns=['under_u'])
+df_p = pd.read_csv(f'{location}/assets/placedata.csv', dtype={'fips':str})
+df_hsc = pd.read_csv(f'{location}/assets/humansocialdata.csv', dtype={'fips':str})
+df_e = pd.read_csv(f'{location}/assets/econdata.csv', dtype={'fips':str})
 
 df_first2 = pd.merge(df_p, df_hsc, on='fips', how='inner')
 df_tot = pd.merge(df_first2, df_e, on='fips', how='inner')
@@ -47,14 +33,9 @@ df_tot = df_tot.drop(columns=['county', 'county_y'])
 df_tot.rename(columns={"county_x": "county"}, inplace=True)
 
 # Other
-df_indices = pd.read_excel(f'{location}/assets/CA_county_data.xlsx', sheet_name='existing indexes',
-                           header=1, dtype={"fips": str})
-
-df_industry = pd.read_excel(f'{location}/assets/CA_county_data.xlsx', sheet_name='REGIONAL ECONOMY',
-                            header=9, dtype={"fips": str})
-
-df_pop_weight = pd.read_excel(f'{location}/assets/CA_county_data.xlsx', sheet_name='CA_county_data',
-                            header=0, usecols='E')
+df_indices = pd.read_csv(f'{location}/assets/indices.csv', dtype={'fips':str})
+df_industry = pd.read_csv(f'{location}/assets/industrydata.csv', dtype={'fips':str})
+df_pop_weight = pd.read_csv(f'{location}/assets/popweightdata.csv', dtype={'fips':str})
 # ------------------------------------------------------------------------------------------------------------
 # SETTING UP TOPIC DICTIONARY
 def getColNames(allColNames: list, startName: str, endName: str) -> list:
@@ -119,12 +100,6 @@ df_e_subj_dict = {"growthprosp": ('county', "size", "stdliving", "prod"),
 
 df_tot_dict = {**df_p_dict, **df_hsc_dict, **df_e_dict}
 df_tot_subj_dict = {**df_p_subj_dict, **df_hsc_subj_dict, **df_e_subj_dict}
-
-# PULLING TABLES FROM DICTIONARY
-
-# print(df_e_dict.get("bus"))
-# df_test = df_e.loc[:, df_e_dict.get("bus")]
-# df_test.head()
 
 
 # NORMALISATION ROUTINE
@@ -202,8 +177,6 @@ df_e_n["hh_noNW"] = (1 - df_e_n["hh_noNW"])
 df_e_n["l_asset_pov_rate"] = (1 - df_e_n["l_asset_pov_rate"])
 
 
-
-
 # AGGREGATION BY DICT- topic
 # for dict in layer, select columns of the normalized df, and then average across to get a new variable vector
 # Multiply by 10 to get score out of 10. if best in all scores, then would get 1 overall, this just puts in a more legible scale
@@ -213,8 +186,12 @@ df_p_aggs = pd.DataFrame()
 for dictentry in df_p_dict:
     subset = df_p_n.loc[:, df_p_dict.get(str(dictentry))]
     vector = subset.mean(axis=1, numeric_only=True)
+    print(subset)
     df_p_aggs[dictentry] = vector * 10
 df_p_aggs.insert(0, "county", df_county)
+
+
+
 
 # human and social capital
 df_hsc_aggs = pd.DataFrame()
@@ -235,6 +212,7 @@ df_e_aggs.insert(0, "county", df_county)
 # total
 df_first2_aggs = pd.merge(df_p_aggs, df_hsc_aggs, on='county', how='inner')
 df_tot_aggs = pd.merge(df_first2_aggs, df_e_aggs, on='county', how='inner')
+
 
 # AGGREGATION BY DICT- Subject
 # for dict in layer, select columns of the aggregated topic df, and then average across to get a new variable vector
@@ -349,7 +327,6 @@ hover_data={'pillar': False,
                            'Subject': hover_pillarsintro,
                },
 
-#make a bar chart of level as compared to CA avg
 
 df_subjects = df_tot_subj_aggs.copy()
 #df_subjects.insert(1, 'fips', df_fipscounty.iloc[:,0])
@@ -374,8 +351,6 @@ countymenu: list = []
 for index, row_name in enumerate(df_county):
     countymenu.append({'label': row_name, 'value': row_name})
 
-NED_logo = f'{location}/assets/Oikos2.png'
-NED_logo_base64 = base64.b64encode(open(NED_logo, 'rb').read()).decode('ascii')
 #-----------------------------------------------------------------------------------------------------------------------
 #Build components
 
