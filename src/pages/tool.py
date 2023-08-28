@@ -702,7 +702,7 @@ layout = dbc.Container([
 )
 def update_page(choro_selected, radioitem_mapbar, radioitem_alpharank, county_selected):
 
-    pillarcirclesfig = px.scatter(df_pillarsintro, x='pillar', y='value', color='pillar', template = "lux",
+    pillarcirclesfig = px.scatter(df_pillarsintro, x='pillar', y='value', color='pillar', #template = "lux",
                      color_discrete_map={
                          "Place-based Conditions": color_p,
                          "Human and Social Capital": color_hsc,
@@ -763,7 +763,7 @@ def update_page(choro_selected, radioitem_mapbar, radioitem_alpharank, county_se
                         #labels=False,
                         hover_name=('county'),
                         hover_data={'fips':False}, #would like to round this to 2 significant digits
-                        template = 'lux'
+                        #template = 'lux'
                         )
     fig_choro.update_geos(fitbounds='locations', visible=False)
     fig_choro.update_layout(
@@ -790,7 +790,7 @@ def update_page(choro_selected, radioitem_mapbar, radioitem_alpharank, county_se
                         hover_name = "county",
                         hover_data = {'county': False},
                         text = "county",
-                        template = 'lux'
+                        #template = 'lux'
     )
     fig_cabars.update_traces(marker_color=pillar_color, opacity=1, marker=dict(line=dict(width=0.33, color='#1a1a1a')))
     fig_cabars.update_xaxes(showgrid=False, showticklabels=False)
@@ -854,7 +854,7 @@ def update_page(choro_selected, radioitem_mapbar, radioitem_alpharank, county_se
         hover_data={'Pillar': False,  # remove from hover data
                     'Score': True,  # add other column, customized formatting
                     },
-        template = 'lux'
+        #template = 'lux'
     )
     fig_countypillars.add_hline(y = NED_wavg, line_width=2.5, line_dash="dash", line_color=color_red, annotation_text = "NED Score average", annotation_font = dict({"color":"rgba(226,126,123,1)"}), annotation_bgcolor = "rgba(250, 251, 251, 0.35)")#, annotation_position = "top left")
     fig_countypillars.update_traces(marker=dict(line=dict(width=1,color='#1a1a1a')), marker_color=[color_p, color_hsc, color_e])
@@ -996,7 +996,7 @@ def update_page(choro_selected, radioitem_mapbar, radioitem_alpharank, county_se
                                  'pillars': False,  # add other column, default formatting
                                  'rank': True,  # add other column, customized formatting
                                  },
-                     template = 'lux'
+                     #template = 'lux'
                      )
     fig_county5.update_traces(marker=dict(size=15,
                                   line=dict(width=1,
