@@ -390,7 +390,7 @@ and resilience. This is the 'size of the local economic pie' and how its 'slices
 
 ned_text3 = '''
 In NED, the three Pillars are not mutually exclusive.
-High Economic Activity scores do not make up for low Place-based Conditions and/or Human and Social Capital scores (this might imply *exogenous economic growth* and *lacking endogenous assets and ecosystem*, and thus inequal opportunity for the region's residents).
+High Economic Activity scores do not make up for low Place-based Conditions and/or Human and Social Capital scores (which might imply exogenous economic growth and lacking endogenous assets and ecosystem, and thus inequal opportunity).
 As such, NED is a *barometer* of the three Pillars where some degree of equilibrium leads to inclusive, sustainable prosperity.
 Economic development strategies can thus be tailored by vieweing the three Pillars together.
 
@@ -485,10 +485,12 @@ choro_tabs = html.Div(
 )
 
 chorotabSee_NED = '''
-NED development across the State is highly variable and distinctly concentrated around major cities (San Francisco Bay Area, Los Angeles, San Diego). The spread is also significant: the score in the lowest county, Tulare, is almost half of top-ranked Marin and Santa Clara's.
+NED development across the State is highly variable and distinctly concentrated around major cities (San Francisco Bay Area, Los Angeles, San Diego). 
+The spread is also significant: the score in the lowest county, Tulare, is almost half of top-ranked Marin and Santa Clara's.
 '''
 chorotabMean_NED = '''
-NED reflects the outcomes of 'agglomeration economies' (the benefits from firms and people being located near each other in industrial clusters). Geographic proximity boosts economic activity and enables the formation of strong social networks, increasing the supply of workers and businesses as well as the demand for an ecosystem around it.
+NED reflects the outcomes of 'agglomeration economies' (the benefits from firms and people being located near each other in industrial clusters). 
+Geographic proximity boosts economic activity and enables the formation of strong social networks, increasing the supply of workers and businesses as well as the demand for an ecosystem around it.
 However, agglomeration economies can also produce marked inequalities from higher living costs, gentrification, and social exclusion. As such, the NED Pillars can show the whether this is occurring.
 
 Consistent with [recent research](https://www.centreforcities.org/reader/office-politics/the-impact-of-agglomeration-on-the-economy/#:~:text=Agglomeration%20occurs%20because%20of%20the,larger%20cities%20and%20industrial%20concentrations.), agglomeration economy spillovers (both positive and negative) are especially strong in the Financial and Business Service sectors and increase with scale, like in the world-class centers of the San Francisco Bay Area, Los Angeles, and San Diego– the regions with the highest NED scores.
@@ -497,7 +499,10 @@ chorotabSee_p = '''
 Place-based Conditions also vary across the state and showcase a wide range: Tulare (lowest) scores less than half of San Francisco (highiest). Significant concentrations exist around industrial clusters on the coast, and to a smaller extent in Northern California.
 '''
 chorotabMean_p = '''
-This Pillar measures the ecosystems being built up around agglomeration, as well as geographic idiosyncracies at play. Beyond attracting Research and Development firms and universities, industrial cluster counties offer more in terms of basic needs and access (to childcare, bandwith or banking). But they trade off higher housing costs, longer commute times, and environmental health. Counties that are more isolated from high economic activity can still offer an empowering ecosystem for their residents (for instance with the widespread higher education system), but decreasing with economic means. 
+This Pillar measures the ecosystems being built up around agglomeration, as well as geographic idiosyncracies at play. 
+Beyond attracting Research and Development firms and universities, industrial cluster counties offer more in terms of basic needs and access (to childcare, bandwith or banking). 
+But they trade off higher housing costs, longer commute times, and environmental health. 
+Counties that are more isolated from high economic activity can still offer an empowering ecosystem for their residents (for instance with the widespread higher education system), but decreasing with economic means. 
 
 To note, the central counties forming a major ground transportation corridor for goods experience significantly worse environmental quality.
 '''
@@ -505,7 +510,11 @@ chorotabSee_hsc = '''
 We see that HSC is quite localized...
 '''
 chorotabMean_hsc = '''
-Social and Human Capital. This more even concentration around cities is due in part to the greater presence of Higher Ed as well as greater social capital. As [Chetty *et al*, 2022](https://socialcapital.org) find, the strength of social networks is quite conducive to, which occurs when people live closer together. 
+Social and Human Capital will concentrate around economic activity, both due to demand (firms that can afford to pay for high skills will do so) and supply (highly skilled and connected individuals want to work in areas with lucrative returns).
+This more even concentration around cities is due in part to the greater presence of Higher Ed as well as greater social capital. However, quality education systems can help share this more evenly.
+
+Social networks can facilitate new matches being made and professional advancement, creating a reinforcing loop.
+As [Chetty *et al*, 2022](https://socialcapital.org) find, the strength of social networks is conducive to upward mobility, both for adults and for children in schools. 
 '''
 chorotabSee_e = '''
 We see that E is quite localized...
