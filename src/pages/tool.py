@@ -186,7 +186,6 @@ df_p_aggs = pd.DataFrame()
 for dictentry in df_p_dict:
     subset = df_p_n.loc[:, df_p_dict.get(str(dictentry))]
     vector = subset.mean(axis=1, numeric_only=True)
-    print(subset)
     df_p_aggs[dictentry] = vector * 10
 df_p_aggs.insert(0, "county", df_county)
 
@@ -866,7 +865,6 @@ def update_page(choro_selected, radioitem_mapbar, radioitem_alpharank, county_se
 
 
     subject_slice = df_subjects.set_index('county').loc[county_selected].round(1)
-    print(subject_slice)
 
     theta9 = [0, 40, 80, 120, 160, 200, 240, 280, 320]
 
@@ -937,16 +935,11 @@ def update_page(choro_selected, radioitem_mapbar, radioitem_alpharank, county_se
 
 
     countyslice = df_topics_rank.set_index('county').loc[county_selected]
-    #print(len(countyslice))
     bottom5 = countyslice.nlargest(n=15, keep='first')
     top5 = countyslice.nsmallest(n=15, keep='first')
 
     top5bottom5rank = pd.concat([top5, bottom5])  # Series of top5 and bottom 5, for the rank #
     top5bottom5neg = top5bottom5rank * (-1)  # Series of negative (for graphing)
-
-    # print(countyslice, len(countyslice))
-    # print(top5bottom5rank, len(top5bottom5rank))
-    # print(top5bottom5neg, len(top5bottom5rank))
 
 
     top5bottom5rank = top5bottom5rank.reset_index()  # prep for data frame
@@ -963,7 +956,6 @@ def update_page(choro_selected, radioitem_mapbar, radioitem_alpharank, county_se
         current_rank = df_top5bottom5.iloc[index]['rank']
 
         to_add = 0.2
-#        print("INDEX:", index, " RANK:", row["rank"])
 
         if index >=0 and index <= 14:
             if index == 0:
