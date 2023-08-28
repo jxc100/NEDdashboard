@@ -488,8 +488,8 @@ chorotabSee_NED = '''
 NED development across the State is highly variable and distinctly concentrated around major cities (San Francisco Bay Area, Los Angeles, San Diego). The spread is also significant: the score in the lowest county, Tulare, is almost half of top-ranked Marin and Santa Clara's.
 '''
 chorotabMean_NED = '''
-NED reflects the outcomes of 'agglomeration economies' (the benefits from firms and people located near each other in industrial clusters). Geographic proximity boosts economic activity and enables the formation of strong social networks, increasing the supply of workers and businesses as well as the demand for an ecosystem around it. However, agglomeration economies also produce marked inequalities from higher living costs, gentrification, and social exclusion.
-This is a significant draw for the development of aspects of the three Pillars concurrently, which happens on a smaller scale in less competitive counties.
+NED reflects the outcomes of 'agglomeration economies' (the benefits from firms and people being located near each other in industrial clusters). Geographic proximity boosts economic activity and enables the formation of strong social networks, increasing the supply of workers and businesses as well as the demand for an ecosystem around it.
+However, agglomeration economies can also produce marked inequalities from higher living costs, gentrification, and social exclusion. As such, the NED Pillars can show the whether this is occurring.
 
 Consistent with [recent research](https://www.centreforcities.org/reader/office-politics/the-impact-of-agglomeration-on-the-economy/#:~:text=Agglomeration%20occurs%20because%20of%20the,larger%20cities%20and%20industrial%20concentrations.), agglomeration economy spillovers (both positive and negative) are especially strong in the Financial and Business Service sectors and increase with scale, like in the world-class centers of the San Francisco Bay Area, Los Angeles, and San Diego– the regions with the highest NED scores.
 '''
@@ -497,8 +497,9 @@ chorotabSee_p = '''
 Place-based Conditions also vary across the state and showcase a wide range: Tulare (lowest) scores less than half of San Francisco (highiest). Significant concentrations exist around industrial clusters on the coast, and to a smaller extent in Northern California.
 '''
 chorotabMean_p = '''
-In this Pillar we see geographic idiosyncracies play out, and some of the tradeoffs from agglomeration economies. The central counties forming a major truck transport corridor experience worse environmental quality and . Less-wealthy counties are less able to provide basic necessities. Converseley, more-wealthy counties experience high
-However, the widespread presence of higher education institutions allows for residents in more counties to have physical access to traditional training. 
+This Pillar measures the ecosystems being built up around agglomeration, as well as geographic idiosyncracies at play. Beyond attracting Research and Development firms and universities, industrial cluster counties offer more in terms of basic needs and access (to childcare, bandwith or banking). But they trade off higher housing costs, longer commute times, and environmental health. Counties that are more isolated from high economic activity can still offer an empowering ecosystem for their residents (for instance with the widespread higher education system), but decreasing with economic means. 
+
+To note, the central counties forming a major ground transportation corridor for goods experience significantly worse environmental quality.
 '''
 chorotabSee_hsc = '''
 We see that HSC is quite localized...
@@ -556,12 +557,6 @@ color_e = "#209bcf"
 
 color_red = "rgba(226,126,123,255)"
 
-#screen colors
-# color_NED = "#3d1594"
-# color_p = "#4611a9"
-# color_hsc = "#a11ebe"
-# color_e = "#dd6f8d"
-
 #-----------------------------------------------------------------------------------------------------------------------
 # Registering page
 dash.register_page(
@@ -573,7 +568,7 @@ dash.register_page(
 #-----------------------------------------------------------------------------------------------------------------------
 # LAYOUT OF THE WEBPAGE
 layout = dbc.Container([
-    html.H1('The NED Interactive Tool', style={'fontsize': '48px', 'text-align': 'center', 'color': 'red'}),
+    html.H1('The NED Interactive Tool', style={'fontsize': '48px', 'text-align': 'center', 'color': "#d8534f"}),
     html.Br(),
     dcc.Markdown(intro_text),
     html.Br(),
