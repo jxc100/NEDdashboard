@@ -363,13 +363,13 @@ The New Economic Development (NED) tool does just that.
 '''
 
 ned_text1 = '''
-The combination of two main sources make up the NED approach:
+The NED approach combines two main sources:
 
 1. Recent research shows the determinant role of social networks, geography, education, and wealth (among others) for 
 enabling local economic development.
 
 2. Community-based organizations, workforce boards, and community colleges elevate the complementary and equally 
-fundamental local role of access, basic needs, and community engagement, particularly for inclusion.
+fundamental role of access, basic needs, and community engagement, particularly for inclusion.
 
 By combining frontier interdisciplinary research with key field-derived learning, three distinct Pillars emerged as 
 comprising the drivers of inclusive local economic development. *Hover over the Pillars below to see what each 
