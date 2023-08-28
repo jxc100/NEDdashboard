@@ -355,8 +355,7 @@ for index, row_name in enumerate(df_county):
 
 intro_text = '''Policymakers are increasingly looking beyond economic activity and growth to gauge a community's 
 quality of life. New emphasis is being placed on households' lived experience and local conditions along with 
-distributions of wealth and opportunity as part of a deeper understanding. Nevertheless, aside from few local 
-examples, no such comprehensive, nationally scalable assessment exists.
+distributions of wealth and opportunity. Nevertheless, aside from few local examples, no such comprehensive, nationally scalable assessment exists.
 
 The New Economic Development (NED) tool does just that.
 '''
@@ -376,24 +375,24 @@ entails.*
 '''
 
 ned_text2place = '''
-###### Place-based Conditions
-refer to the physical foundation upon which people live. Health, 
+...refer to the physical foundation upon which people live. Health, 
 environment, and access are factored along with other metrics of thriving communities.'''
 
 ned_text2humancap = '''
-###### Human and Social Capital
-cover the enablers of development given by individual 
+...cover the enablers of development given by individual 
 education to social affiliation. This includes training pipelines and the strength of networks.
 '''
 
 ned_text2econact = '''
-###### Economic Activity
-represents material and financial prosperity, potential, 
+...represents material and financial prosperity, potential, 
 and resilience. This is the 'size of the local economic pie' and how its 'slices' are distributed.
 '''
 
 ned_text3 = '''
-In the NED approach, the three Pillars are not mutually exclusive. For example, a region's incredible Economic Activity score does not make up for woeful Place-based Conditions and/or Human and Social Capital scores (implying exogenous economic growth and lacking endogenous assets and ecosystem). As such, NED is a *barometer* of the three Pillars where some degree of equilibrium leads to inclusive, sustainable prosperity. Economic development strategies can thus be tailored by vieweing the three Pillars together.
+In NED, the three Pillars are not mutually exclusive.
+High Economic Activity scores do not make up for low Place-based Conditions and/or Human and Social Capital scores (this might imply *exogenous economic growth* and *lacking endogenous assets and ecosystem*, and thus inequal opportunity for the region's residents).
+As such, NED is a *barometer* of the three Pillars where some degree of equilibrium leads to inclusive, sustainable prosperity.
+Economic development strategies can thus be tailored by vieweing the three Pillars together.
 
 The NED tool is made up as follows:
 '''
@@ -703,7 +702,7 @@ layout = dbc.Container([
 )
 def update_page(choro_selected, radioitem_mapbar, radioitem_alpharank, county_selected):
 
-    pillarcirclesfig = px.scatter(df_pillarsintro, x='pillar', y='value', color='pillar',
+    pillarcirclesfig = px.scatter(df_pillarsintro, x='pillar', y='value', color='pillar', template = "lux",
                      color_discrete_map={
                          "Place-based Conditions": color_p,
                          "Human and Social Capital": color_hsc,
@@ -764,6 +763,7 @@ def update_page(choro_selected, radioitem_mapbar, radioitem_alpharank, county_se
                         #labels=False,
                         hover_name=('county'),
                         hover_data={'fips':False}, #would like to round this to 2 significant digits
+                        template = 'lux'
                         )
     fig_choro.update_geos(fitbounds='locations', visible=False)
     fig_choro.update_layout(
@@ -789,7 +789,8 @@ def update_page(choro_selected, radioitem_mapbar, radioitem_alpharank, county_se
     fig_cabars = px.bar(df_forpillars, x = 'county', y= choro_selected,
                         hover_name = "county",
                         hover_data = {'county': False},
-                        text = "county"
+                        text = "county",
+                        template = 'lux'
     )
     fig_cabars.update_traces(marker_color=pillar_color, opacity=1, marker=dict(line=dict(width=0.33, color='#1a1a1a')))
     fig_cabars.update_xaxes(showgrid=False, showticklabels=False)
@@ -852,7 +853,8 @@ def update_page(choro_selected, radioitem_mapbar, radioitem_alpharank, county_se
         hover_name='Pillar',
         hover_data={'Pillar': False,  # remove from hover data
                     'Score': True,  # add other column, customized formatting
-                    }
+                    },
+        template = 'lux'
     )
     fig_countypillars.add_hline(y = NED_wavg, line_width=2.5, line_dash="dash", line_color=color_red, annotation_text = "NED Score average", annotation_font = dict({"color":"rgba(226,126,123,1)"}), annotation_bgcolor = "rgba(250, 251, 251, 0.35)")#, annotation_position = "top left")
     fig_countypillars.update_traces(marker=dict(line=dict(width=1,color='#1a1a1a')), marker_color=[color_p, color_hsc, color_e])
@@ -993,7 +995,8 @@ def update_page(choro_selected, radioitem_mapbar, radioitem_alpharank, county_se
                                  'zeros': False,
                                  'pillars': False,  # add other column, default formatting
                                  'rank': True,  # add other column, customized formatting
-                                 }
+                                 },
+                     template = 'lux'
                      )
     fig_county5.update_traces(marker=dict(size=15,
                                   line=dict(width=1,
