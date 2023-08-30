@@ -131,7 +131,7 @@ df_egraph_dict = {"size":"iii. Size of Local Economy",
                   "assistance": "iii. Budgetary Assistance",
                   "incineq": "iii. Income Inequality",
                   "homeown": "iii. Homeownership",
-                  "bank": "iii. Standard of Living",
+                  "bank": "iii. Access to Wealth",
                   "finresil": "iii. Financial Resilience",
                   "patents": "iii. Patents",
                   "bus": "iii. Business Establishments",
@@ -360,20 +360,18 @@ df_nedpillars_rank = df_nedpillars_rank.rename(columns={"NED": "NED_r", "p": "p_
 
 #-----------------------------------------------------------------------------------------------------------------------
 #Data of webpage
+color_graphbg = '#fafbfb' #'rgba(247,247,249,255)' #grey of dropdown men, 'rgba(179, 205, 227, 0.15)' light blue
+#dbc LUX colors
+color_NED = "#d8534f"
+color_p = "#4abf73"
+color_hsc = "#f0ad4e"
+color_e = "#209bcf"
 
-dict_pillarsintro = {'pillar': ['Place-based Conditions', 'Human and Social Capital', "Economic Activity"],
-                     'value': [0, 0, 0],
-                     'subjects':[['Environmental Health', 'Food and Physical Health Security', 'Housing', "Transportation", "Access to Banking, Childcare, and Broadband", "Innovation and Creation Institutions", "Skill-building"], ['Educational Attainment', 'Schooling Outcomes', 'Opportunity Youth', 'Social Networks', 'Social Cohesion'], ['Size of Local Economy', 'Standard of Living', 'Productivity', 'Jobs', 'Employment', "Unemployment", "Labor Force Participation", "Earnings", "Household Income", "Poverty", "Budgetary Assistance", "Income Inequality", "Homeownership", "Banking", "Financial Resilience", "Patents", "Businesses", "Small Business Loans"]]}
-df_pillarsintro = pd.DataFrame(data=dict_pillarsintro)
-hover_pillarsintro = ["<br>".join(subject) for subject in df_pillarsintro['subjects']]
+color_red = "rgba(226,126,123,255)"
+
 
 df_pillars = pd.merge(df_nedpillars_fips, df_nedpillars_rank, on='county', how='inner')
 df_pillars = df_pillars.round(1)
-hover_data={'pillar': False,
-                           'value': False,
-                           'Subject': hover_pillarsintro,
-               },
-
 
 df_subjects = df_tot_subj_aggs.copy()
 #df_subjects.insert(1, 'fips', df_fipscounty.iloc[:,0])
@@ -408,44 +406,11 @@ distributions of wealth and opportunity. Nevertheless, aside from few local exam
 The New Economic Development (NED) tool does just that.
 '''
 
-ned_text1 = '''
-The NED approach combines two main sources:
 
-1. Recent research shows the determinant role of social networks, geography, education, and wealth (among others) for 
-enabling local economic development.
-
-2. Community-based organizations, workforce boards, and community colleges elevate the complementary and equally 
-fundamental role of access, basic needs, and community engagement, particularly for inclusion.
-
-By combining frontier interdisciplinary research with key field-derived learning, three distinct Pillars emerged as 
-comprising the drivers of inclusive local economic development. *Hover over the Pillars below to see what each 
-entails.*
-'''
-
-ned_text2place = '''
-...refer to the physical foundation upon which people live. Health, 
-environment, and access are factored along with other metrics of thriving communities.'''
-
-ned_text2humancap = '''
-...cover the enablers of development given by individual 
-education to social affiliation. This includes training pipelines and the strength of networks.
-'''
-
-ned_text2econact = '''
-...represents material and financial prosperity, potential, 
-and resilience. This is the 'size of the local economic pie' and how its 'slices' are distributed.
-'''
-
-ned_text3 = '''
-In NED, the three Pillars are not mutually exclusive.
-High Economic Activity scores do not make up for low Place-based Conditions and/or Human and Social Capital scores (which might imply exogenous economic growth and lacking endogenous assets and ecosystem, and thus inequal opportunity).
-As such, NED is a *barometer* of the three Pillars where some degree of equilibrium leads to inclusive, sustainable prosperity.
-Economic development strategies can thus be tailored by vieweing the three Pillars together.
-
-The NED tool is made up as follows:
-'''
 choro_text1 = '''
-Explore NED throughout California's 58 counties. An aggregation of the Pillars into a general NED score is presented for comparison to common development metrics like Gross Regional Product or the Human Development Index. *Select a dimension from the menu below, and use the buttons above it to toggle between views.*
+Explore NED throughout California's 58 counties. An aggregation of the Pillars into a general NED score is presented for comparison to common development metrics like Gross Regional Product or the Human Development Index.
+
+*Select a dimension from the menu below, and use the buttons above it to toggle between views.*
 '''
 
 county_text = '''
@@ -455,49 +420,16 @@ Analyze individual counties' performance the NED way through the three subsequen
 *Ex: large magnitudes (Los Angeles) and lack of balance (Butte) showcase the variety of county experiences.*
 
 * Dig deeper with the eight Subjects (ii.) on the right showing the major categories underlying each Pillar.  
-*Ex: significant differences within Pillars (Lassen, Economic Activity) highlight the part of an ecosystem policies can focus.*
+*Ex: significant differences within Pillars (Lassen, Economic Activity) highlight the part of the ecosystem that local policies can focus.*
 
 * Finally, examine the distribution of Topics (iii., below) rankings to see specifically where counties specialize, and where they are weaker.  
-*Ex: wide spreads (San Francisco) suggest targeted approaches, whereas more concentrated rankings (Imperial) suggest a comprehensive plan is needed.*
+*Ex: Skewed spreads (San Francisco) evidence the need for targeted approaches to comparatively improve local NED, whereas more concentrated lower rankings (Imperial) suggest a comprehensive economic development plan is required.*
 
 *Start by selecting a county using the dropdown menu below, and hover over the figures for more information.*
 '''
 
-futurework_text1 = '''
-As this work develops, the aim remains to raise public awareness and provide policymakers a means to make more informed decisions.
-
-There are three main avenues of work that the NED tool opens up:
-
-1. Academic research to understand the significance of the determinants of inclusive local and regional economic development
-2. Applying the NED tool to a variety of other studies to provide broader context of community impact/status in specific decisions
-3. Informing social entrepreneurs and general investment what areas may be best suited to benefit from dollars
-'''
-
-futurework_academia= '''
-##### Academic Research
-For the retrospective analysis, work is underway to analyze which determinants are most important under what circumtances. A proprietary ML approach has been developed to do so that can help identify the weighting towards
-Similarly, are there correlations between the various Subjects that reduce the set of levers that policymakers need to affect for given outcome? And how does this change from sutaiton to sutiation.
 
 
-As an example, looking at the 3D scatter plot, we see a general positive correlation across the three indicators. Is this more empirical proof of Agglomeration economies, through a lens of inclusive economic development?
-'''
-
-futurework_policymaking = '''
-##### Use in Policymaking
-The NED tool can be useful in specific contexts as the baseline reference of a place (rather than Gross Regional Product for instance). For example, looking at LOCATION QUOTIENTS helps identify. But, what does this mean in the context of a place? What does this mean given the particular industrial . For example, we can look at location quotients of places to identify how its made up. Scatter plot of LQ with NED shows, , which suggests that 
-
-CORRELATION map next to , w
-
-
-Another example involves the future of work. Fitting into context of Green job creation as an opportunity to spur economic devlopment that's sustainable, and that boosts inclusive prosperity.
-'''
-
-futurework_socialinv ='''
-##### Social Entrepreneurship
-Can help locate areas where ...
-'''
-
-pillar_circles = dcc.Graph(figure={},config={'displayModeBar': False})
 chorotitle = dcc.Markdown(children='')
 choro_graph = dcc.Graph(figure={}, config={'modeBarButtonsToRemove': ['zoom', 'pan', 'select', 'lasso2d']})
 nedpillar_graph = dcc.Graph(figure={})
@@ -607,15 +539,6 @@ radio_alpharank = dcc.RadioItems(
 
 
 
-color_graphbg = '#fafbfb' #'rgba(247,247,249,255)' #grey of dropdown men, 'rgba(179, 205, 227, 0.15)' light blue
-#dbc LUX colors
-color_NED = "#d8534f"
-color_p = "#4abf73"
-color_hsc = "#f0ad4e"
-color_e = "#209bcf"
-
-color_red = "rgba(226,126,123,255)"
-
 #-----------------------------------------------------------------------------------------------------------------------
 # Registering page
 dash.register_page(
@@ -632,29 +555,7 @@ layout = dbc.Container([
     dcc.Markdown(intro_text),
     html.Br(),
 #------------
-    html.H3('The NED approach', style={'fontsize': '24px', 'text-align': 'left', 'color': 'rgb(52,60,68)'}),
-    dcc.Markdown(ned_text1),
-    dbc.Row(
-        [
-            dbc.Col([pillar_circles], width = {"size": 12})
-        ]
-    ),
-    dbc.Row(
-        [
-            dbc.Col(dcc.Markdown(ned_text2place), width = {"size": 4}),
-            dbc.Col(dcc.Markdown(ned_text2humancap), width = {"size": 4}),
-            dbc.Col(dcc.Markdown(ned_text2econact), width = {"size": 4}),
-        ]
-    ),
-    html.Br(),
-    dcc.Markdown(ned_text3),
-    dcc.Markdown('''$$
-                    NED \impliedby i.~Pillars \impliedby ii.~Subjects \impliedby iii.~Topics
-                    $$''', mathjax=True, style={"font-size": "17pt"}),
-    dcc.Markdown('''*Visit the [Methodology](/methodology) page for more information about the data and approach. And, see the NED tool in action below!*'''),
-    html.Br(),
-#------------
-    html.H3("California's Status", style={'fontsize': '24px', 'text-align': 'left', 'color': 'rgb(52,60,68)'}),
+    html.H3("California State View", style={'fontsize': '24px', 'text-align': 'left', 'color': 'rgb(52,60,68)'}),
     dcc.Markdown(children=choro_text1),
     dbc.Row(
         [
@@ -713,33 +614,14 @@ layout = dbc.Container([
     ], justify='center'),
     html.Br(),
 #------------
-    html.H3('What does this all mean? Correlations and future developments', style={'fontsize': '24px', 'text-align': 'left', 'color': 'DarkSlateGrey'}),
-    html.Br(),
-    dbc.Row([
-        dcc.Markdown(children=futurework_text1)
-    ]),
-    dbc.Row([
-        dcc.Markdown(children=futurework_academia)
-    ]),
-    dbc.Row([
-        dbc.Col([pillars_correlationgraph], width=12)
-    ]),
-    dbc.Row([
-        dcc.Markdown(children=futurework_policymaking)
-    ]),
-    dbc.Row([
-        dcc.Markdown(children=futurework_socialinv)
-    ]),
-#------------
 #    footerbar
-], fluid=False)
+], fluid=False, className="dbc")
 
 
 #-----------------------------------------------------------------------------------------------------------------------
 #Allows components to interact
 
 @callback(     # number of outputs must equal number of returns below
-    Output(pillar_circles, 'figure'),
     Output(choro_graph, 'figure'),
     Output(chorotitle, 'children'),
     Output(chorotab_See, 'children'),
@@ -749,42 +631,6 @@ layout = dbc.Container([
     Input(radio_alpharank, 'value'),
 )
 def update_ca(choro_selected, radioitem_mapbar, radioitem_alpharank):
-
-    pillarcirclesfig = px.scatter(df_pillarsintro, x='pillar', y='value', color='pillar', #template = "lux",
-                     color_discrete_map={
-                         "Place-based Conditions": color_p,
-                         "Human and Social Capital": color_hsc,
-                         "Economic Activity": color_e
-                     },
-                     opacity=0.85,
-                     #hover_name='pillar',
-                     hover_data={'pillar': False,
-                                 'value': False,
-                                 'Subject': hover_pillarsintro,
-                                 },
-
-                     )
-    pillarcirclesfig.update_traces(marker=dict(size=60, line=dict(width=1.5, color='DarkSlateGrey')),
-                                  # customdata = np_pillarsintro,
-                                  # hovertemplate=("Subjects: %{customdata[1]}")                   ##################################################
-                      )
-    pillarcirclesfig.update_xaxes(showgrid=False,
-                     )
-    pillarcirclesfig.update_yaxes(showgrid=False,
-                     zeroline=False,
-                     showticklabels=False,
-                     )
-    pillarcirclesfig.layout.xaxis.fixedrange = True
-    pillarcirclesfig.layout.yaxis.fixedrange = True
-    pillarcirclesfig.update_layout(
-        title=None,
-        xaxis_title=None,
-        yaxis_title=None,
-        showlegend=False,
-    )
-    pillarcirclesfig.update_layout(height=310, plot_bgcolor='white', font=dict(size=17))
-
-
 
 
     # Graph-title
@@ -807,11 +653,9 @@ def update_ca(choro_selected, radioitem_mapbar, radioitem_alpharank):
     # Plotly express
     fig_choro = px.choropleth(df_pillars, geojson=counties, locations='fips', scope="usa", color=choro_selected,
                         color_continuous_scale=chorocholor,
-                        height = 450,
-                        #labels=False,
+                        height = 600,
                         hover_name=('county'),
                         hover_data={'fips':False}, #would like to round this to 2 significant digits
-                        #template = 'lux'
                         )
     fig_choro.update_geos(fitbounds='locations', visible=False)
     fig_choro.update_layout(
@@ -838,7 +682,6 @@ def update_ca(choro_selected, radioitem_mapbar, radioitem_alpharank):
                         hover_name = "county",
                         hover_data = {'county': False},
                         text = "county",
-                        #template = 'lux'
     )
     fig_cabars.update_traces(marker_color=pillar_color, opacity=1, marker=dict(line=dict(width=0.33, color='#1a1a1a')))
     fig_cabars.update_xaxes(showgrid=False, showticklabels=False)
@@ -878,13 +721,12 @@ def update_ca(choro_selected, radioitem_mapbar, radioitem_alpharank):
         chorotab_s = chorotabSee_e
         chorotab_m = chorotabMean_e
 
-    return pillarcirclesfig, fig_ca, '#### '+chorovalue+' Score', chorotab_s, chorotab_m
+    return fig_ca, '#### '+chorovalue+' Score', chorotab_s, chorotab_m
 
 @callback(     # number of outputs must equal number of returns below
     Output(county_pillarsgraph, 'figure'),
     Output(county_flower, 'figure'),
     Output(county_top5bot5graph, 'figure'),
-    Output(pillars_correlationgraph, 'figure'),
     Output(countytitle, 'children'),
     Input(county_dropdown, 'value'),
 )
@@ -901,9 +743,6 @@ def update_counties(county_selected):
     df_pillars_slice2["Pillar"] = ["Place-based Conditions", "Human and Social Capital", "Economic Activity"]
     df_pillars_slice2["Average"] = [p_wavg, hsc_wavg, e_wavg]
 
-
-    NED_wavg = np.average(df_nedpillars["NED"], weights=df_pop_weight["pop_perc"])
-
     # Plotly express
     fig_countypillars = px.bar(
         df_pillars_slice2, x = 'Pillar', y = 'Score',
@@ -911,7 +750,6 @@ def update_counties(county_selected):
         hover_data={'Pillar': False,  # remove from hover data
                     'Score': True,  # add other column, customized formatting
                     },
-        #template = 'lux'
     )
     fig_countypillars.add_hline(y = NED_wavg, line_width=2.5, line_dash="dash", line_color=color_red, annotation_text = "NED Score CA avg.", annotation_font = dict({"color":"rgba(226,126,123,1)"}), annotation_bgcolor = "rgba(250, 251, 251, 0.35)")#, annotation_position = "top left")
     fig_countypillars.update_traces(marker=dict(line=dict(width=1,color='#1a1a1a')), marker_color=[color_p, color_hsc, color_e])
@@ -963,7 +801,6 @@ def update_counties(county_selected):
         line_width = 2,
         line_shape = 'spline',
         line_smoothing = 1.3
-
     ))
     fig_subjflower.add_trace(go.Scatterpolar(
         r= [e_wavg, e_wavg, e_wavg, e_wavg, e_wavg],
@@ -984,7 +821,6 @@ def update_counties(county_selected):
             radialaxis=dict(range=[0, 8.5], showticklabels=False, ticks=''),
             angularaxis=dict(showticklabels=False, ticks='')
         ),
-        #plot_bgcolor=color_graphbg,
         title = 'ii. Subject Scores'
     )
 
@@ -1083,15 +919,6 @@ def update_counties(county_selected):
     fig_county5.layout.xaxis.fixedrange = True
     fig_county5.layout.yaxis.fixedrange = True
 
-    fig_3dscatter = px.scatter_3d(
-        df_pillars, x = 'p', y= 'hsc', z='e'
-    )
-    fig_3dscatter.update_traces(marker=dict(size=5,
-                                  line=dict(width=1,
-                                            color='#1a1a1a')),
-                      )
-    fig_3dscatter.update_layout(height=400, plot_bgcolor=color_graphbg)
 
 
-
-    return fig_countypillars, fig_subjflower, fig_county5, fig_3dscatter, '#### The most similar countes to '+county_selected+" county are:",
+    return fig_countypillars, fig_subjflower, fig_county5, '#### The most similar countes to '+county_selected+" county are:",

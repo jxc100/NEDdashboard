@@ -32,7 +32,7 @@ color_p = "#4abf73"
 color_hsc = "#f0ad4e"
 color_e = "#209bcf"
 
-colorscale_phsce = ["#4abf73","#f0ad4e","#209bcf"]
+colorscale_phsce = [color_e,color_p,color_hsc]
 #-----------------------------------------------------------------------------------------------------------------------
 # Build components
 #print(df_treemap.head())
@@ -49,7 +49,7 @@ treemap_graph = dcc.Graph(figure=treemap,config={'displayModeBar': False})
 
 #-----------------------------------------------------------------------------------------------------------------------
 # LAYOUT OF THE WEBPAGE
-layout= html.Div(
+layout= dbc.Container(
     [
         html.H4("General methodology"),
         dcc.Markdown('''
@@ -102,5 +102,5 @@ layout= html.Div(
 
         )
 
-    ]
+    ], fluid = False, className="dbc"
 )

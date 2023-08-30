@@ -21,6 +21,7 @@ linksbar = dbc.Row(
         dbc.Col(dbc.DropdownMenu(
             children=[
                 dbc.DropdownMenuItem("NED Tool", href='/'),
+                dbc.DropdownMenuItem("About this tool", href='/about'),
                 dbc.DropdownMenuItem("Methodology", href='/methodology'),
             ],
             nav=True,
@@ -88,7 +89,8 @@ app.layout = dbc.Container(
         html.Br(),
         footerbar,
     ],
-    fluid=False
+    fluid=False,
+    className="dbc"
 )
 
 # add callback for toggling the collapse on small screens
