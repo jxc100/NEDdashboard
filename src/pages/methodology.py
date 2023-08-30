@@ -7,9 +7,6 @@ import plotly_express as px
 import pathlib
 
 location = pathlib.Path(__file__).parent.parent
-#location = './src'
-#location = '/Users/ali/Desktop/Projects/Dashboard/Website/src'
-#Users/ali/ for personal, Users/aconway/ for work
 
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -27,15 +24,28 @@ dash.register_page(
 df_treemap = pd.read_csv(f'{location}/assets/df_treemap.csv')
 df_treemap = df_treemap.drop('Unnamed: 0', axis=1)
 
+color_graphbg = '#fafbfb' #'rgba(247,247,249,255)' #grey of dropdown men, 'rgba(179, 205, 227, 0.15)' light blue
+#dbc LUX colors
+color_NED = "#d8534f"
+color_p = "#4abf73"
+color_hsc = "#f0ad4e"
+color_e = "#209bcf"
+
+colorscale_phsce = ["#4abf73","#f0ad4e","#209bcf"]
 #-----------------------------------------------------------------------------------------------------------------------
 # Build components
 #print(df_treemap.head())
 
-treemap = px.treemap(df_treemap, path=[px.Constant("NED"), 'pillar', 'topic', 'subject'] , values=None)
-treemap.update_traces(root_color="lightgrey")
+treemap = px.treemap(df_treemap, path=[px.Constant("NED"), 'pillar', 'topic', 'subject'], values=None,
+                     color_discrete_sequence= colorscale_phsce)
+treemap.update_traces(root_color='lightgrey')
 treemap.update_layout(margin = dict(t=50, l=25, r=25, b=25))
+treemap.update_traces(hovertemplate = None, hoverinfo = "skip")
 
 treemap_graph = dcc.Graph(figure=treemap,config={'displayModeBar': False})
+
+
+
 #-----------------------------------------------------------------------------------------------------------------------
 # LAYOUT OF THE WEBPAGE
 layout= html.Div(

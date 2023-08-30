@@ -45,7 +45,6 @@ def getColNames(allColNames: list, startName: str, endName: str) -> list:
 
     return subset
 
-
 # place
 df_p_colnames = list(df_p.columns)
 df_p_dict = {"envhealth": ('fips', 'county', *getColNames(df_p_colnames, "water_violation", "particulate_matter")),
@@ -59,6 +58,17 @@ df_p_dict = {"envhealth": ('fips', 'county', *getColNames(df_p_colnames, "water_
              }
 df_p_subj_dict = {"basic_needs": ('county', "envhealth", "foodhealth", "housing", "transport"),
                   "access": ('county', "access_bcb", "innovcreation", "skillbuilding")}
+df_pgraph_dict = {"envhealth":"iii. Environmental Health",
+                  "foodhealth":"iii. Food and Physical Health Security",
+                  "housing":"iii. Housing and Neighborhoods",
+                  "transport":"iii. Transportation",
+                  "access_bcb":"iii. Access to Finance Institutions, Childcare, and Broadband",
+                  "innovcreation":"iii. Density of Innovative Creation Organizations",
+                  "skillbuilding":"ii. Density of Skill-building Centers"
+}
+df_pgraph_subj_dict = {"basic_needs":"ii. Basic Needs",
+                  "access":"ii. Access",
+}
 
 # human and social capital
 df_hsc_colnames = list(df_hsc.columns)
@@ -70,6 +80,15 @@ df_hsc_dict = {"educattain": ('fips', 'county', *getColNames(df_hsc_colnames, "a
               }
 df_hsc_subj_dict = {"eductalent": ('county', "educattain", "schooling", "oppyouth"),
                    "socialcapital": ('county', "socialnet", "socialcohesion")}
+df_hscgraph_dict = {"educattain":"iii. Educational Attainment, current adults",
+                  "schooling":"iii. Schooling Outcomes, current students",
+                  "oppyouth":"iii. Transitional and Opportunity Youth",
+                  "socialnet":"iii. Social Networks",
+                  "socialcohesion":"iii. Social Cohesion"
+}
+df_hscgraph_subj_dict = {"eductalent":"ii. Education and Talent",
+                  "socialcapital":"ii. Social Capital",
+}
 
 # economic development
 df_e_colnames = list(df_e.columns)
@@ -97,9 +116,36 @@ df_e_subj_dict = {"growthprosp": ('county', "size", "stdliving", "prod"),
                   "income": ('county', "hhinc", "poverty", "assistance", "incineq"),
                   "wealth": ('county', "homeown", "bank", "finresil"),
                   "busenv": ('county', "patents", "bus", "smallbusloan")}
+df_egraph_dict = {"size":"iii. Size of Local Economy",
+                  "stdliving":"iii. Standard of Living",
+                  "prod":"iii. Productivity",
+                  "jobs":"iii. Jobs",
+                  "emp": "iii. Employment",
+                  "u": "iii. Unemployment",
+                  "lf": "iii. Labor Force",
+                  "earn": "iii. Earnings",
+                  "hhinc": "iii. Household Income",
+                  "poverty": "iii. Poverty",
+                  "assistance": "iii. Budgetary Assistance",
+                  "incineq": "iii. Income Inequality",
+                  "homeown": "iii. Homeownership",
+                  "bank": "iii. Standard of Living",
+                  "finresil": "iii. Financial Resilience",
+                  "patents": "iii. Patents",
+                  "bus": "iii. Business Establishments",
+                  "smallbusloan": "iii. Loans to Small Businesses"
+}
+df_egraph_subj_dict = {"growthprosp":"ii. Growth and Prosperity",
+                       "labormarket":"ii. Labor Market",
+                       "income": "ii. Household Income",
+                       "wealth": "ii. Household Wealth",
+                       "busenv": "ii. Business Environment",
+}
 
 df_tot_dict = {**df_p_dict, **df_hsc_dict, **df_e_dict}
 df_tot_subj_dict = {**df_p_subj_dict, **df_hsc_subj_dict, **df_e_subj_dict}
+df_totgraph_dict = {**df_pgraph_dict, **df_hscgraph_dict, **df_egraph_dict}
+df_totgraph_subj_dict = {**df_pgraph_subj_dict, **df_hscgraph_subj_dict, **df_egraph_subj_dict}
 
 
 # NORMALISATION ROUTINE
@@ -504,7 +550,7 @@ Beyond attracting Research and Development firms and universities, industrial cl
 But they trade off higher housing costs, longer commute times, and environmental health. 
 Counties that are more isolated from high economic activity can still offer an empowering ecosystem for their residents (for instance with the widespread higher education system), but decreasing with economic means. 
 
-To note, the central counties forming a major ground transportation corridor for goods experience significantly worse environmental quality.
+To note, the central counties forming a major ground transportation corridor for goods experience significantly worse environmental quality, which contributes to their worse Place-based Conditions.
 '''
 chorotabSee_hsc = '''
 We see that HSC is quite localized...
@@ -682,7 +728,7 @@ layout = dbc.Container([
     ]),
 #------------
 #    footerbar
-], fluid=True)
+], fluid=False)
 
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -860,7 +906,7 @@ def update_page(choro_selected, radioitem_mapbar, radioitem_alpharank, county_se
                     },
         #template = 'lux'
     )
-    fig_countypillars.add_hline(y = NED_wavg, line_width=2.5, line_dash="dash", line_color=color_red, annotation_text = "NED Score average", annotation_font = dict({"color":"rgba(226,126,123,1)"}), annotation_bgcolor = "rgba(250, 251, 251, 0.35)")#, annotation_position = "top left")
+    fig_countypillars.add_hline(y = NED_wavg, line_width=2.5, line_dash="dash", line_color=color_red, annotation_text = "NED Score CA avg.", annotation_font = dict({"color":"rgba(226,126,123,1)"}), annotation_bgcolor = "rgba(250, 251, 251, 0.35)")#, annotation_position = "top left")
     fig_countypillars.update_traces(marker=dict(line=dict(width=1,color='#1a1a1a')), marker_color=[color_p, color_hsc, color_e])
     fig_countypillars.update_yaxes(range=[0, np.max(df_pillars['hsc'] + .1)], showgrid=False)
     fig_countypillars.update_xaxes(tickmode = 'array', tickvals = df_pillars_slice2['Pillar'], ticktext = ["PbC", "HSC", "EA"])

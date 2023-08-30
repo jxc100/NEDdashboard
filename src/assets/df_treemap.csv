@@ -1,31 +1,31 @@
 ,subject,topic,pillar
-0,envhealth,basic_needs,i. Place-based Conditions
-1,foodhealth,basic_needs,i. Place-based Conditions
-2,housing,basic_needs,i. Place-based Conditions
-3,transport,basic_needs,i. Place-based Conditions
-4,secondary,access,i. Place-based Conditions
-5,innovcreation,access,i. Place-based Conditions
-6,skillbuilding,access,i. Place-based Conditions
-7,educattain,eductalent,i. Human and Social capital
-8,schooling,eductalent,i. Human and Social capital
-9,oppyouth,eductalent,i. Human and Social capital
-10,socialnet,socialcapital,i. Human and Social capital
-11,socialcohesion,socialcapital,i. Human and Social capital
-12,size,growthprosp,i. Economic Activity
-13,stdliving,growthprosp,i. Economic Activity
-14,prod,growthprosp,i. Economic Activity
-15,jobs,labormarket,i. Economic Activity
-16,emp,labormarket,i. Economic Activity
-17,u,labormarket,i. Economic Activity
-18,lf,labormarket,i. Economic Activity
-19,earn,labormarket,i. Economic Activity
-20,hhinc,income,i. Economic Activity
-21,poverty,income,i. Economic Activity
-22,assistance,income,i. Economic Activity
-23,incineq,income,i. Economic Activity
-24,homeown,wealth,i. Economic Activity
-25,bank,wealth,i. Economic Activity
-26,finresil,wealth,i. Economic Activity
-27,patents,busenv,i. Economic Activity
-28,bus,busenv,i. Economic Activity
-29,smallbusloan,busenv,i. Economic Activity
+0,iii. Environmental Health,ii. Basic Needs,i. Place-based Conditions
+1,iii. Food and Physical Health Security,ii. Basic Needs,i. Place-based Conditions
+2,iii. Housing and Neighborhoods,ii. Basic Needs,i. Place-based Conditions
+3,iii. Transportation,ii. Basic Needs,i. Place-based Conditions
+4,"iii. Access to Finance Institutions, Childcare, and Broadband",ii. Access,i. Place-based Conditions
+5,iii. Density of Innovative Creation Organizations,ii. Access,i. Place-based Conditions
+6,ii. Density of Skill-building Centers,ii. Access,i. Place-based Conditions
+7,"iii. Educational Attainment, current adults",ii. Education and Talent,i. Human and Social Capital
+8,"iii. Schooling Outcomes, current students",ii. Education and Talent,i. Human and Social Capital
+9,iii. Transitional and Opportunity Youth,ii. Education and Talent,i. Human and Social Capital
+10,iii. Social Networks,ii. Social Capital,i. Human and Social Capital
+11,iii. Social Cohesion,ii. Social Capital,i. Human and Social Capital
+12,iii. Size of Local Economy,ii. Growth and Prosperity,i. Economic Activity
+13,iii. Standard of Living,ii. Growth and Prosperity,i. Economic Activity
+14,iii. Productivity,ii. Growth and Prosperity,i. Economic Activity
+15,iii. Jobs,ii. Labor Market,i. Economic Activity
+16,iii. Employment,ii. Labor Market,i. Economic Activity
+17,iii. Unemployment,ii. Labor Market,i. Economic Activity
+18,iii. Labor Force,ii. Labor Market,i. Economic Activity
+19,iii. Earnings,ii. Labor Market,i. Economic Activity
+20,iii. Household Income,ii. Household Income,i. Economic Activity
+21,iii. Poverty,ii. Household Income,i. Economic Activity
+22,iii. Budgetary Assistance,ii. Household Income,i. Economic Activity
+23,iii. Income Inequality,ii. Household Income,i. Economic Activity
+24,iii. Homeownership,ii. Household Wealth,i. Economic Activity
+25,iii. Standard of Living,ii. Household Wealth,i. Economic Activity
+26,iii. Financial Resilience,ii. Household Wealth,i. Economic Activity
+27,iii. Patents,ii. Business Environment,i. Economic Activity
+28,iii. Business Establishments,ii. Business Environment,i. Economic Activity
+29,iii. Loans to Small Businesses,ii. Business Environment,i. Economic Activity
