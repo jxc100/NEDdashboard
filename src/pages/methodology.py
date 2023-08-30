@@ -2,7 +2,8 @@ import dash
 import pandas as pd
 from dash import html, dcc
 import dash_bootstrap_components as dbc
-import plotly.graph_objects as go
+from dash_bootstrap_templates import load_figure_template
+load_figure_template("lux")
 import plotly_express as px
 import pathlib
 

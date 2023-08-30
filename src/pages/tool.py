@@ -7,6 +7,8 @@ import plotly.graph_objects as go
 from dash import Dash, dcc, html, Input, Output, State, callback
 import dash
 import dash_bootstrap_components as dbc
+from dash_bootstrap_templates import load_figure_template
+load_figure_template("lux")
 import numpy as np
 from urllib.request import urlopen
 import json
@@ -587,7 +589,8 @@ radio_mapbar = dcc.RadioItems(
         {'label': ' Bar chart (rankings).', 'value': 'bar'}
     ],
     value = 'map',
-    inline=True
+    inline=True,
+    className="mb-4"
 )
 
 radio_alpharank = dcc.RadioItems(
@@ -598,7 +601,8 @@ radio_alpharank = dcc.RadioItems(
     ],
     style={'margin-right': '50px'},
     value = 'alph',
-    inline=True
+    inline=True,
+    className="mb-4"
 )
 
 
@@ -673,14 +677,14 @@ layout = dbc.Container([
     html.Br(),
     dbc.Row(
         [
-            dbc.Col(html.Div("Display:"), width="auto"),
+            dbc.Col(dcc.Markdown("Display:"), width="auto"),
             dbc.Col(radio_mapbar, width='auto'),
         ],
         justify='start',
     ),
     dbc.Row(
         [
-            dbc.Col(html.Div("Display counties of Bar chart"), width = "auto"),
+            dbc.Col(dcc.Markdown("Display counties of Bar chart"), width = "auto"),
             dbc.Col(radio_alpharank, width='auto'),
         ],
         justify='start',
@@ -739,18 +743,12 @@ layout = dbc.Container([
     Output(choro_graph, 'figure'),
     Output(chorotitle, 'children'),
     Output(chorotab_See, 'children'),
-    Output(chorotab_Mean, 'children'),########################################################################################################
-    Output(county_pillarsgraph, 'figure'),
-    Output(county_flower, 'figure'),
-    Output(county_top5bot5graph, 'figure'),
-    Output(pillars_correlationgraph, 'figure'),
-    Output(countytitle, 'children'),
+    Output(chorotab_Mean, 'children'),
     Input(choro_dropdown, 'value'),
     Input(radio_mapbar, 'value'),
     Input(radio_alpharank, 'value'),
-    Input(county_dropdown, 'value'),
 )
-def update_page(choro_selected, radioitem_mapbar, radioitem_alpharank, county_selected):
+def update_ca(choro_selected, radioitem_mapbar, radioitem_alpharank):
 
     pillarcirclesfig = px.scatter(df_pillarsintro, x='pillar', y='value', color='pillar', #template = "lux",
                      color_discrete_map={
@@ -880,8 +878,17 @@ def update_page(choro_selected, radioitem_mapbar, radioitem_alpharank, county_se
         chorotab_s = chorotabSee_e
         chorotab_m = chorotabMean_e
 
+    return pillarcirclesfig, fig_ca, '#### '+chorovalue+' Score', chorotab_s, chorotab_m
 
-# ------------------------
+@callback(     # number of outputs must equal number of returns below
+    Output(county_pillarsgraph, 'figure'),
+    Output(county_flower, 'figure'),
+    Output(county_top5bot5graph, 'figure'),
+    Output(pillars_correlationgraph, 'figure'),
+    Output(countytitle, 'children'),
+    Input(county_dropdown, 'value'),
+)
+def update_counties(county_selected):
     sf_pillars_slice = df_pillars.set_index('county').loc[county_selected]
     df_pillars_slice1 = pd.DataFrame({'Pillar': sf_pillars_slice.index, 'Score': sf_pillars_slice.values})
     df_pillars_slice2 = pd.DataFrame(df_pillars_slice1.loc[df_pillars_slice1['Pillar'].isin(['p', 'hsc', 'e'])])
@@ -1076,8 +1083,6 @@ def update_page(choro_selected, radioitem_mapbar, radioitem_alpharank, county_se
     fig_county5.layout.xaxis.fixedrange = True
     fig_county5.layout.yaxis.fixedrange = True
 
-
-
     fig_3dscatter = px.scatter_3d(
         df_pillars, x = 'p', y= 'hsc', z='e'
     )
@@ -1089,4 +1094,4 @@ def update_page(choro_selected, radioitem_mapbar, radioitem_alpharank, county_se
 
 
 
-    return pillarcirclesfig, fig_ca, '#### '+chorovalue+' Score', chorotab_s, chorotab_m, fig_countypillars, fig_subjflower, fig_county5, fig_3dscatter, '#### The most similar countes to '+county_selected+" county are:",
+    return fig_countypillars, fig_subjflower, fig_county5, fig_3dscatter, '#### The most similar countes to '+county_selected+" county are:",

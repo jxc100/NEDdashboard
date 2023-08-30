@@ -17,7 +17,7 @@ NED_logo_base64 = base64.b64encode(open(NED_logo, 'rb').read()).decode('ascii')
 linksbar = dbc.Row(
     [
         dbc.Col(dbc.NavItem(dbc.NavLink("About the author", href="https://alessandroconway.netlify.app",
-                        external_link='True', target='_blank', style={"color":"#cfcfcf"})), width = 'auto'),
+                        external_link='True', target='_blank', style={"color":"#a3a6a8"})), width = 'auto'),
         dbc.Col(dbc.DropdownMenu(
             children=[
                 dbc.DropdownMenuItem("NED Tool", href='/'),
@@ -26,7 +26,7 @@ linksbar = dbc.Row(
             nav=True,
             in_navbar=True,
             label="Menu",
-            toggle_style={"color": "#cfcfcf"},
+            toggle_style={"color": "#a3a6a8"},
         )),
     ],
     className="g-0 ms-auto flex-nowrap mt-3 mt-md-0",
@@ -105,4 +105,4 @@ def toggle_navbar_collapse(n, is_open):
 #Run the app
 if __name__ == '__main__':
 #   app.run_server(debug=False)
-   app.run(debug=False, host='127.0.0.1', port=8061)
+   app.run(debug=True, host='127.0.0.1', port=8061)
