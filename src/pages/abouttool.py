@@ -26,9 +26,12 @@ color_e = "#209bcf"
 
 color_red = "rgba(226,126,123,255)"
 
+# data
+df_treemap = pd.read_csv(f'{location}/assets/df_treemap.csv')
+df_treemap = df_treemap.drop('Unnamed: 0', axis=1)
+colorscale_phsce = [color_e,color_p,color_hsc]
 
 #  text
-
 ned_text1 = '''
 The NED approach combines two main sources:
 
@@ -62,8 +65,6 @@ In NED, the three Pillars are not mutually exclusive.
 High Economic Activity scores do not make up for low Place-based Conditions and/or Human and Social Capital scores (which might imply exogenous economic growth and lacking endogenous assets and ecosystem, and thus inequal opportunity).
 As such, NED is a *barometer* of the three Pillars where some degree of equilibrium leads to inclusive, sustainable prosperity.
 Economic development strategies can thus be tailored by vieweing the three Pillars together.
-
-The NED tool is made up as follows:
 '''
 
 futurework_text1 = '''
@@ -89,7 +90,6 @@ futurework_policymaking = '''
 ##### Use in Policymaking
 The NED tool can be useful in specific contexts as the baseline reference of a place (rather than Gross Regional Product for instance). For example, looking at LOCATION QUOTIENTS helps identify. But, what does this mean in the context of a place? What does this mean given the particular industrial . For example, we can look at location quotients of places to identify how its made up. Scatter plot of LQ with NED shows, , which suggests that 
 
-CORRELATION map next to , w
 
 
 Another example involves the future of work. Fitting into context of Green job creation as an opportunity to spur economic devlopment that's sustainable, and that boosts inclusive prosperity.
@@ -100,7 +100,8 @@ futurework_socialinv ='''
 Can help locate areas where ...
 '''
 
-# figures
+#-----------------------------------------------------------------------------------------------------------------------
+# Build components
 dict_pillarsintro = {'pillar': ['Place-based Conditions', 'Human and Social Capital', "Economic Activity"],
                      'value': [0, 0, 0],
                      'subjects':[['Environmental Health', 'Food and Physical Health Security', 'Housing and Neighborhoods', "Transportation", "Access to Finance Institutions, Childcare, and Broadband", "Density of Innovation and Creation Organizations", "Density of Skill-building Centers"], ['Educational Attainment, current adults', 'Schooling Outcomes, current students', 'Transitional and Opportunity Youth', 'Social Networks', 'Social Cohesion'], ['Size of Local Economy', 'Standard of Living', 'Productivity', 'Jobs', 'Employment', "Unemployment", "Labor Force", "Earnings", "Household Income", "Poverty", "Budgetary Assistance", "Income Inequality", "Homeownership", "Banking", "Financial Resilience", "Patents", "Business Establishments", "Loans to Small Business"]]}
@@ -144,6 +145,15 @@ pillarcirclesfig.update_layout(height=310, plot_bgcolor='white', font=dict(size=
 
 pillar_circles = dcc.Graph(figure=pillarcirclesfig,config={'displayModeBar': False})
 
+
+
+treemap = px.treemap(df_treemap, path=[px.Constant("NED"), 'pillar', 'topic', 'subject'], values=None,
+                     color_discrete_sequence= colorscale_phsce)
+treemap.update_traces(root_color='lightgrey')
+treemap.update_layout(margin = dict(t=50, l=25, r=25, b=25))
+treemap.update_traces(hovertemplate = None, hoverinfo = "skip")
+
+treemap_graph = dcc.Graph(figure=treemap,config={'displayModeBar': False})
 #-----------------------------------------------------------------------------------------------------------------------
 # Registering page
 dash.register_page(
@@ -172,10 +182,23 @@ layout = dbc.Container([
     ),
     html.Br(),
     dcc.Markdown(ned_text3),
-    dcc.Markdown('''$$
+    html.Br(),
+#------------
+    html.H3('NED Hierarchy', style={'fontsize': '24px', 'text-align': 'left', 'color': 'rgb(52,60,68)'}),
+    dcc.Markdown('''The NED tool is made up as follows:'''),
+    dcc.Markdown('''
+                    $$
                     NED \impliedby i.~Pillars \impliedby ii.~Subjects \impliedby iii.~Topics
                     $$''', mathjax=True, style={"font-size": "17pt"}),
-    dcc.Markdown('''*Visit the [Methodology](/methodology) page for more information about the data and approach. And, see the [NED tool](/) in action!*'''),
+    html.Br(),
+    dcc.Markdown('''
+    See below a Treemap showcasing the data that comprise hierarchy of i. Pillars, ii. Subjects, and iii. Topics in the overall NED framework. Click into the modules to zoom in, and use the bar at the top to zoom out.
+    '''),
+    dbc.Row([
+        dbc.Col([treemap_graph], width=12)
+    ]),
+    dcc.Markdown('''
+        *Visit the [Methodology](/methodology) page for more information about the data and approach. And, see the [NED tool](/) in action!*'''),
     html.Br(),
 #------------
     html.H3('Future Developments', style={'fontsize': '24px', 'text-align': 'left', 'color': 'DarkSlateGrey'}),

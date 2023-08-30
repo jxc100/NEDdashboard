@@ -22,8 +22,6 @@ dash.register_page(
 #-----------------------------------------------------------------------------------------------------------------------
  #Data of webpage
 
-df_treemap = pd.read_csv(f'{location}/assets/df_treemap.csv')
-df_treemap = df_treemap.drop('Unnamed: 0', axis=1)
 
 color_graphbg = '#fafbfb' #'rgba(247,247,249,255)' #grey of dropdown men, 'rgba(179, 205, 227, 0.15)' light blue
 #dbc LUX colors
@@ -32,18 +30,12 @@ color_p = "#4abf73"
 color_hsc = "#f0ad4e"
 color_e = "#209bcf"
 
-colorscale_phsce = [color_e,color_p,color_hsc]
+
 #-----------------------------------------------------------------------------------------------------------------------
 # Build components
-#print(df_treemap.head())
 
-treemap = px.treemap(df_treemap, path=[px.Constant("NED"), 'pillar', 'topic', 'subject'], values=None,
-                     color_discrete_sequence= colorscale_phsce)
-treemap.update_traces(root_color='lightgrey')
-treemap.update_layout(margin = dict(t=50, l=25, r=25, b=25))
-treemap.update_traces(hovertemplate = None, hoverinfo = "skip")
 
-treemap_graph = dcc.Graph(figure=treemap,config={'displayModeBar': False})
+
 
 
 
@@ -69,12 +61,6 @@ layout= dbc.Container(
             * **Wealth** – to assess home and asset ownership, banking availability, and financial resilience.
             * **Business Environment** – to assess entrepreneurial outcomes and opportunities.
         '''),
-        dcc.Markdown('''
-            See below a Treemap of the pillars, topics, and subjects and how they relate to one-another and to the overall NED framework. Click into the modules to zoom in, and use the bar at the top to zoom out.
-        '''),
-        dbc.Row([
-            dbc.Col([treemap_graph], width=12)
-        ]),
         html.H4("Data"),
         dcc.Markdown('''
             Main sources are:
