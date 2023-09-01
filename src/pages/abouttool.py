@@ -67,38 +67,41 @@ As such, NED is a *barometer* of the three Pillars where some degree of equilibr
 Economic development strategies can thus be tailored by vieweing the three Pillars together.
 '''
 
+ned_text4 = '''
+The general categories that cover inclusive economic prosperity and well-being follow: 
+
+* **Basic Needs** – to assess environmental, physical, and food health, security, housing, and transport.
+
+* **Access** – to assess access to financial institutions and insurance, and broadband.
+
+* **Education and Talent** – to assess educational attainment, schooling outcomes, and opportunity youth.
+
+* **Social Capital** – to access social networks and cohesion.
+
+* **Growth and Prosperity** – to assess the size and standard of living of local economies, alongside productivity.
+
+* **Labor Market** – to assess jobs, employment, participation, and earnings.
+
+* **Household Income** – to assess household budgets, poverty, financial assistance, and income inequality.
+
+* **Household Wealth** – to assess home and asset ownership, banking availability, and financial resilience.
+
+* **Business Environment** – to assess entrepreneurial outcomes and opportunities.
+
+These form the cornerstone of the NED approach and were accumulated largely from local and regional economic development research (spanning urban and economic geography papers, macroeconomics, and labor economics) along with social capital research and social psychology. At the same time, field-derived learning about local economic development best practices, needs being elevated, community engagement, best practices for elevating  voices, 
+They defined the range of what a quality life was, one with equitable opportunity for prosperity, for well-being, and also consdierate of local characteristics. Ultimately they makes up the Subjects (*ii.*) that we will see below.
+'''
+
 futurework_text1 = '''
-As this work develops, the aim remains to raise public awareness and provide policymakers a means to make more informed decisions.
+As this work develops, the aim remains to raise public awareness and provide local and regional policymakers with a means to make evidence-based decisions in the unprecedented (and pressing), beyond-GDP context wihtout a clear framework that still needs to factor new vocies and insights.
 
 There are three main avenues of work that the NED tool opens up:
 
 1. Academic research to understand the significance of the determinants of inclusive local and regional economic development
-2. Applying the NED tool to a variety of other studies to provide broader context of community impact/status in specific decisions
-3. Informing social entrepreneurs and general investment what areas may be best suited to benefit from dollars
+2. Applying the NED tool to a variety of other studies to provide broader context of community impact and status given specific decisions
+3. Informing social investors and entrepreneurs general investment about where to benefit from funds, and why
 '''
 
-futurework_academia= '''
-##### Academic Research
-For the retrospective analysis, work is underway to analyze which determinants are most important under what circumtances. A proprietary ML approach has been developed to do so that can help identify the weighting towards
-Similarly, are there correlations between the various Subjects that reduce the set of levers that policymakers need to affect for given outcome? And how does this change from sutaiton to sutiation.
-
-
-As an example, looking at the 3D scatter plot, we see a general positive correlation across the three indicators. Is this more empirical proof of Agglomeration economies, through a lens of inclusive economic development?
-'''
-
-futurework_policymaking = '''
-##### Use in Policymaking
-The NED tool can be useful in specific contexts as the baseline reference of a place (rather than Gross Regional Product for instance). For example, looking at LOCATION QUOTIENTS helps identify. But, what does this mean in the context of a place? What does this mean given the particular industrial . For example, we can look at location quotients of places to identify how its made up. Scatter plot of LQ with NED shows, , which suggests that 
-
-
-
-Another example involves the future of work. Fitting into context of Green job creation as an opportunity to spur economic devlopment that's sustainable, and that boosts inclusive prosperity.
-'''
-
-futurework_socialinv ='''
-##### Social Entrepreneurship
-Can help locate areas where ...
-'''
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Build components
@@ -182,6 +185,7 @@ layout = dbc.Container([
     ),
     html.Br(),
     dcc.Markdown(ned_text3),
+    dcc.Markdown(ned_text4),
     html.Br(),
 #------------
     html.H3('NED Hierarchy', style={'fontsize': '24px', 'text-align': 'left', 'color': 'rgb(52,60,68)'}),
@@ -192,7 +196,7 @@ layout = dbc.Container([
                     $$''', mathjax=True, style={"font-size": "17pt"}),
     html.Br(),
     dcc.Markdown('''
-    See below a Treemap showcasing the data that comprise hierarchy of i. Pillars, ii. Subjects, and iii. Topics in the overall NED framework. Click into the modules to zoom in, and use the bar at the top to zoom out.
+    See below a Treemap displaying the data comprising the hierarchy of Pillars (*i.*), Subjects (*ii.*), and Topics (*iii.*) within the overall NED framework. Click into the modules to zoom in, and use the bar at the top to zoom out.
     '''),
     dbc.Row([
         dbc.Col([treemap_graph], width=12)
@@ -201,20 +205,15 @@ layout = dbc.Container([
         *Visit the [Methodology](/methodology) page for more information about the data and approach. And, see the [NED tool](/) in action!*'''),
     html.Br(),
 #------------
-    html.H3('Future Developments', style={'fontsize': '24px', 'text-align': 'left', 'color': 'DarkSlateGrey'}),
+    html.H3('Aim and Future Developments', style={'fontsize': '24px', 'text-align': 'left', 'color': 'DarkSlateGrey'}),
     html.Br(),
     dbc.Row([
         dcc.Markdown(children=futurework_text1)
     ]),
+    html.Br(),
     dbc.Row([
-        dcc.Markdown(children=futurework_academia)
-    ]),
-    dbc.Row([
-        dcc.Markdown(children=futurework_policymaking)
-    ]),
-    dbc.Row([
-        dcc.Markdown(children=futurework_socialinv)
-    ]),
+        dcc.Markdown('''##### Please feel free to reach out concerning collaborations or discussing this work!''')
+    ])
 #------------
 #    footerbar
 ], fluid=False, className="dbc")

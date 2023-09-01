@@ -429,9 +429,7 @@ for index, row_name in enumerate(df_county):
 #-----------------------------------------------------------------------------------------------------------------------
 #Build components
 
-intro_text = '''Policymakers are increasingly looking beyond economic activity and growth to gauge a community's 
-quality of life. New emphasis is being placed on households' lived experience and local conditions along with 
-distributions of wealth and opportunity. Nevertheless, aside from few local examples, no such comprehensive, nationally scalable assessment exists.
+intro_text = '''Individuals' lived experience and local conditions are increasingly understood as key components of a community's economic development. But what constitutes inclusive, sustainable, and effective local economic development? How can policymakers, researchers, and social entrepreneurs understand this fuller regional development lens, identify areas of opportunity, and come up with successful strategies? Aside from few local examples, no such comprehensive, nationally scalable assessment exists.
 
 The New Economic Development (NED) tool does just that.
 '''
@@ -458,25 +456,24 @@ intro_text2 = '''
 Crucially, the balance of indicator levels across these three Pillars is what determines a place's standing. *Delve deeper in the [About this tool](/about) page.*
 '''
 intro_text3 = '''
-From granular census, business, workforce, and social network data, evaluate local economic development across California's 58 counties by selecting the [State](#toCA) or the [Individual County](#toCounty) views below.
+>From granular US census, business, workforce, and social networks data, evaluate and compare local economic development the NED way across California's 58 counties based on 30 essential topics for material living conditions and equitable quality of life. Select either the [California](#toCA) or the individual [County](#toCounty) views below.
 '''
-
 choro_text1 = '''
-An aggregation of the Pillars into a general NED score is presented for comparison to common development metrics like Gross Regional Product or the Human Development Index.
+See how inclusive economic development is distributed across California. Each of the three Pillars (*i.*) are presented individually and as an averaged general NED score, which serves as a benchmark and a comparison to common single development metrics like Gross Regional Product or the Human Development Index.
 
-*Select a dimension from the menu below, and use the buttons above it to toggle between views.*
+*Select a dimension from the menu below, and use the buttons above it to toggle between the Map and Bar chart.*
 '''
 
 county_text = '''
 Analyze individual counties' performance the NED way through the three subsequent levels of depth to identify the particular situation they're in.
 
-* Start top left with the Pillars (i.) barometer, which shows the general balance forming inclusive, sustainable economic development.  
+1. Start top left with the Pillars (i.) barometer, which shows the general balance forming inclusive, sustainable economic development.  
 *Ex: large magnitudes (Los Angeles) and lack of balance (Butte) showcase the variety of county experiences.*
 
-* Dig deeper with the eight Subjects (ii.) on the right showing the major categories underlying each Pillar.  
-*Ex: significant differences within Pillars (Lassen, Economic Activity) highlight the part of the ecosystem that local policies can focus.*
+2. Dig deeper with the eight Subjects (ii.) on the right showing the major categories underlying each Pillar.  
+*Ex: significant differences within Pillars (Lassen, Economic Activity and Place-based Conditions) or Santa Clara (Economic Activity) highlight how balance (or imbalance) can scale whatever a county's means are.*
 
-* Finally, examine the distribution of Topics (iii., below) rankings to see specifically where counties specialize, and where they are weaker.  
+3. Finally, examine the distribution of Topics (iii., below) rankings to see specifically where counties specialize, and where they are weaker.  
 *Ex: Skewed higher spreads (San Francisco) evidence the need for targeted approaches to comparatively improve local NED, whereas more concentrated lower rankings (Imperial) or widespread scores (Amador) suggest a comprehensive economic development plan is required.*
 
 *Start by selecting a county using the dropdown menu below, and hover over the figures for more information.*
@@ -487,7 +484,7 @@ modal = html.Div(
         dbc.Button("The NED Approach", id="open", n_clicks=0, color="dark", outline=True, className="me-1"),
         dbc.Modal(
             [
-                dbc.ModalHeader(dbc.ModalTitle("Inclusive, Sustainable, Smart Economic Growth")),
+                dbc.ModalHeader(dbc.ModalTitle("Inclusive, Sustainable, and Effective Economic Growth")),
                 dbc.ModalBody([
                     dbc.Row(
                         [
@@ -510,7 +507,7 @@ modal = html.Div(
                     ),
                     dbc.Row(
                         [
-                            dbc.Col(dcc.Markdown('''The NED Pillars (noted with an *i.* for clarity) are made up of Subjects (*ii.*) that cover each's relevant categories. These are themselves composed of Topics (*iii.*), composites of measured data.'''))
+                            dbc.Col(dcc.Markdown('''The NED Pillars (notated with an *i.* for clarity) are made up of Subjects (*ii.*) covering their relevant categories, which are themselves composed of Topics (*iii.*), composites of measured data.'''))
                         ]
                     ),
                     dbc.Row(
@@ -567,38 +564,40 @@ NED development across the State is highly variable and distinctly concentrated 
 The spread is also significant: the score in the lowest county, Tulare, is almost half of top-ranked Marin and Santa Clara's.
 '''
 chorotabMean_NED = '''
-NED reflects the outcomes of 'agglomeration economies' (the benefits from firms and people being located near each other in industrial clusters). 
+NED is reflecting in large part the outcomes of 'agglomeration economies' (the benefits from firms and people being located near each other in industrial clusters). 
 Geographic proximity boosts economic activity and enables the formation of strong social networks, increasing the supply of workers and businesses as well as the demand for an ecosystem around it.
-However, agglomeration economies can also produce marked inequalities from higher living costs, gentrification, and social exclusion. As such, the NED Pillars can show the whether this is occurring.
+However, agglomeration economies can also produce marked inequalities from higher living costs, gentrification, and social exclusion. From the current vantage point view, this complexity is not perceptible, but the Pillars (*i.*) can start to uncover it.
 
 Consistent with [recent research](https://www.centreforcities.org/reader/office-politics/the-impact-of-agglomeration-on-the-economy/#:~:text=Agglomeration%20occurs%20because%20of%20the,larger%20cities%20and%20industrial%20concentrations.), agglomeration economy spillovers (both positive and negative) are especially strong in the Financial and Business Service sectors and increase with scale, like in the world-class centers of the San Francisco Bay Area, Los Angeles, and San Diego– the regions with the highest NED scores.
 '''
 chorotabSee_p = '''
-Place-based Conditions also vary across the state and showcase a wide range: Tulare (lowest) scores less than half of San Francisco (highiest). Significant concentrations exist around industrial clusters on the coast, and to a smaller extent in Northern California.
+Place-based Conditions vary across the state and showcase a wide range: Tulare (lowest) scores less than half of San Francisco (highiest). Significant concentrations exist around industrial clusters on the coast, and unlike with the NED score, to a lesser extent in Northern California.
 '''
 chorotabMean_p = '''
 This Pillar measures the ecosystems being built up around agglomeration, as well as geographic idiosyncracies at play. 
-Beyond attracting Research and Development firms and universities, industrial cluster counties offer more in terms of basic needs and access (to childcare, bandwith or banking). 
-But they trade off higher housing costs, longer commute times, and environmental health. 
-Counties that are more isolated from high economic activity can still offer an empowering ecosystem for their residents (for instance with the widespread higher education system), but decreasing with economic means. 
+In addition to attracting Research and Development firms and universities, industrial cluster counties offer more in terms of basic needs and access to services. 
+But, they trade off higher housing costs, longer commute times, and environmental health to name a few. 
+Counties that are more isolated from high economic activity can still offer an empowering ecosystem for their residents (a merit for instance of widespread higher education systems), but this is decreasing with scale.
 
 To note, the central counties forming a major ground transportation corridor for goods experience significantly worse environmental quality, which contributes to their worse Place-based Conditions.
 '''
 chorotabSee_hsc = '''
-We see that HSC is quite localized...
+Human and Social Capital are still quite variable across California, but the spread is less extreme: San Luis Obispo (highest) scores less than double Alpine (lowest).
 '''
 chorotabMean_hsc = '''
 Social and Human Capital will concentrate around economic activity, both due to demand (firms that can afford to pay for high skills will do so) and supply (highly skilled and connected individuals want to work in areas with lucrative returns).
-This more even concentration around cities is due in part to the greater presence of Higher Ed as well as greater social capital. However, quality education systems can help share this more evenly.
+This more even concentration around cities is due in part to the greater presence of Higher Education as well as greater social capital. However, quality education systems can help share this more evenly (recalling the intersection with the Place-based Conditions Pillar).
 
 Social networks can facilitate new matches being made and professional advancement, creating a reinforcing loop.
 As [Chetty *et al*, 2022](https://socialcapital.org) find, the strength of social networks is conducive to upward mobility, both for adults and for children in schools. 
 '''
 chorotabSee_e = '''
-We see that E is quite localized...
+The Economic Activity Pillar showcases the most variation and spread. Santa Clara (highest score) scores more than triple what Imperial (lowest) reaches. Likewise, we see a much higher skew given by the highest scorers being so significantly high. 
 '''
 chorotabMean_e = '''
-Agglomeration economies . For instance, we can see that play out in the wine-producing counteis of Northern California. Difference with Ag elsewhere is that:
+Given the sheer size and significance of California's economy, it is natural for Economic Acitivty to be concentrated around its main engines, the world-class industrial clusters. Agglomeration around them creates high demand for exogenous assets, which in turn create more prosperity and create a self-reinforcing loop. It follows that this decreases with scale.
+
+Inequalities and wealth divides are especially apparent in counties with high exogenous economic growth (where people, firms, and assets move to due to demand, pricing out locals who are not able to tap into the high-earning workstreams), which is . The importance of the other Pillars is in keeping this in check.
 '''
 
 closing_text = '''
@@ -659,7 +658,7 @@ layout = dbc.Container([
     dbc.Row([dcc.Markdown(intro_text3, id = "toCA")]),
     html.Br(),
 #------------
-    html.H3("California State View", style={'fontsize': '24px', 'text-align': 'left', 'color': 'rgb(52,60,68)'}, id="ca"),
+    html.H3("California NED", style={'fontsize': '24px', 'text-align': 'left', 'color': 'rgb(52,60,68)'}, id="ca"),
     dcc.Markdown(children=choro_text1),
     dbc.Row(
         [
@@ -696,10 +695,12 @@ layout = dbc.Container([
     ),
     html.Br(),
     dbc.Row([choro_tabs]),
-    html.Br(id = "toCounty"),
+    html.Br(),
+    dbc.Row([dcc.Markdown('''*Unpack the variation of NED in California by looking through each of its counties' particular conditions.*''', id = "toCounty")]),
+    html.Br(),
     html.Br(),
 #------------
-    html.H3('County Analysis', style={'fontsize': '24px', 'text-align': 'left', 'color': 'rgb(52,60,68)'}, id="county"),
+    html.H3('County NED', style={'fontsize': '24px', 'text-align': 'left', 'color': 'rgb(52,60,68)'}),
     dcc.Markdown(children=county_text),
     dbc.Row([
         dbc.Col([county_dropdown], width=3)
@@ -843,7 +844,6 @@ def update_ca(choro_selected, radioitem_mapbar, radioitem_alpharank):
     Output(county_pillarsgraph, 'figure'),
     Output(county_flower, 'figure'),
     Output(county_top5bot5graph, 'figure'),
-    Output(countytitle, 'children'),
     Input(county_dropdown, 'value'),
 )
 def update_counties(county_selected):
@@ -878,7 +878,6 @@ def update_counties(county_selected):
 
 
     subject_slice = df_subjects.set_index('county').loc[county_selected].round(1)
-
     theta9 = [0, 40, 80, 120, 160, 200, 240, 280, 320]
 
     fig_subjflower = go.Figure(go.Barpolar(
@@ -890,15 +889,13 @@ def update_counties(county_selected):
         marker_line_width=1,
         opacity=0.8,
         # hovertemplate=
-        # "<b>%{text}</b><br><br>" +
-        # "GDP per Capita: %{x:$,.0f}<br>" +
-        # "Life Expectation: %{y:.0%}<br>" +
-        # "Population: %{marker.size:,}" +
+        # "<b>%{Subject}</b><br><br>" +
+        # f"{subject_slice}<br>" +
         # "<extra></extra>",
     ))
     fig_subjflower.add_trace(go.Scatterpolar(
-        r= [p_wavg, p_wavg],
-        theta=[0, 40],
+        r= [NED_wavg.round(1), NED_wavg.round(1),NED_wavg.round(1),NED_wavg.round(1),NED_wavg.round(1),NED_wavg.round(1),NED_wavg.round(1),NED_wavg.round(1),NED_wavg.round(1),NED_wavg.round(1),],
+        theta=[0, 40, 80, 120, 160, 200, 240, 280, 320, 360],
         mode='lines',
         name='Place-based Conditions average',
         line_color=color_red,
@@ -907,28 +904,39 @@ def update_counties(county_selected):
         line_shape = 'spline',
         line_smoothing = 1.3
     ))
-    fig_subjflower.add_trace(go.Scatterpolar(
-        r= [hsc_wavg, hsc_wavg],
-        theta=[80, 120],
-        mode='lines',
-        name='Human and Social Capital average',
-        line_color=color_red,
-        line_dash = 'dot',
-        line_width = 2,
-        line_shape = 'spline',
-        line_smoothing = 1.3
-    ))
-    fig_subjflower.add_trace(go.Scatterpolar(
-        r= [e_wavg, e_wavg, e_wavg, e_wavg, e_wavg],
-        theta=[160, 200, 240, 280, 320],
-        mode='lines',
-        name='Economic Activity average',
-        line_color=color_red,
-        line_dash='dot',
-        line_width=2,
-        line_shape='spline',
-        line_smoothing=1.3
-    ))
+    # fig_subjflower.add_trace(go.Scatterpolar(
+    #     r= [p_wavg.round(1), p_wavg.round(1)],
+    #     theta=[0, 40],
+    #     mode='lines',
+    #     name='Place-based Conditions average',
+    #     line_color=color_red,
+    #     line_dash='dot',
+    #     line_width = 2,
+    #     line_shape = 'spline',
+    #     line_smoothing = 1.3
+    # ))
+    # fig_subjflower.add_trace(go.Scatterpolar(
+    #     r= [hsc_wavg.round(1), hsc_wavg.round(1)],
+    #     theta=[80, 120],
+    #     mode='lines',
+    #     name='Human and Social Capital average',
+    #     line_color=color_red,
+    #     line_dash = 'dot',
+    #     line_width = 2,
+    #     line_shape = 'spline',
+    #     line_smoothing = 1.3
+    # ))
+    # fig_subjflower.add_trace(go.Scatterpolar(
+    #     r= [e_wavg.round(1), e_wavg.round(1).round(1), e_wavg.round(1), e_wavg.round(1), e_wavg.round(1)],
+    #     theta=[160, 200, 240, 280, 320],
+    #     mode='lines',
+    #     name='Economic Activity average',
+    #     line_color=color_red,
+    #     line_dash='dot',
+    #     line_width=2,
+    #     line_shape='spline',
+    #     line_smoothing=1.3
+    # ))
     fig_subjflower.update_layout(
         grid=None,
         showlegend = False,
@@ -985,19 +993,19 @@ def update_counties(county_selected):
 
     for index in df_top5bottom5['index']:
         if index in df_e_dict:
-            df_top5bottom5.loc[df_top5bottom5['index'] == index, 'pillars'] = 'e'
+            df_top5bottom5.loc[df_top5bottom5['index'] == index, 'pillars'] = 'Economic Activity'
         elif index in df_hsc_dict:
-            df_top5bottom5.loc[df_top5bottom5['index'] == index, 'pillars'] = 'hsc'
+            df_top5bottom5.loc[df_top5bottom5['index'] == index, 'pillars'] = 'Human and Social Capital'
         else:
-            df_top5bottom5.loc[df_top5bottom5['index'] == index, 'pillars'] = 'p'
+            df_top5bottom5.loc[df_top5bottom5['index'] == index, 'pillars'] = 'Place-based Conditions'
 
     fig_county5 = px.scatter(df_top5bottom5, x='rank_neg', y='zeros', color='pillars',
                      color_discrete_map={
-                         "p": color_p,
-                         "hsc": color_hsc,
-                         "e": color_e
+                         "Place-based Conditions": color_p,
+                         "Human and Social Capital": color_hsc,
+                         "Economic Activity": color_e
                      },
-                     category_orders={"pillars": ["p", "hsc", "e"]},
+                     category_orders={"pillars": ["Place-based Conditions", "Human and Social Capital", "Economic Activity"]},
                      # opacity=0.85,
                      hover_name='index',
                      hover_data={'rank_neg': False,  # remove from hover data
@@ -1005,7 +1013,6 @@ def update_counties(county_selected):
                                  'pillars': False,  # add other column, default formatting
                                  'rank': True,  # add other column, customized formatting
                                  },
-                     #template = 'lux'
                      )
     fig_county5.update_traces(marker=dict(size=15,
                                   line=dict(width=1,
@@ -1037,4 +1044,4 @@ def update_counties(county_selected):
 
 
 
-    return fig_countypillars, fig_subjflower, fig_county5, '#### The most similar countes to '+county_selected+" county are:",
+    return fig_countypillars, fig_subjflower, fig_county5

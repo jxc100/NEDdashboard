@@ -50,17 +50,6 @@ layout= dbc.Container(
         dcc.Markdown('''
             NED includes 83 variables spanning the breadth of , These are then aggregated by relatedness into 33 Subjects, themselves forming the following 8 Topics:
         '''),
-        dcc.Markdown(children = '''
-            * **Basic Needs** – to assess environmental, physical, and food health, security, housing, and transport.
-            * **Place-based Access** – to assess access to financial institutions and insurance, and broadband.
-            * **Education and Talent** – to assess educational attainment, schooling outcomes, and opportunity youth.
-            * **Social Capital** – to access social networks and cohesion.
-            * **Growth and Prosperity** – to assess the size and standard of living of local economies, alongside productivity.
-            * **Labor Markets** – to assess jobs, employment, participation, and earnings.
-            * **Income** – to assess household budgets, poverty, financial assistance, and income inequality.
-            * **Wealth** – to assess home and asset ownership, banking availability, and financial resilience.
-            * **Business Environment** – to assess entrepreneurial outcomes and opportunities.
-        '''),
         html.H4("Data"),
         dcc.Markdown('''
             Main sources are:
