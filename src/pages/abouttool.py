@@ -33,7 +33,7 @@ colorscale_phsce = [color_e,color_p,color_hsc]
 
 #  text
 ned_text1 = '''
-The NED approach combines two main sources:
+The NED approach is informed by two main sources:
 
 1. Recent research shows the determinant role of social networks, geography, education, and wealth (among others) for 
 enabling local economic development.
@@ -104,7 +104,7 @@ Can help locate areas where ...
 # Build components
 dict_pillarsintro = {'pillar': ['Place-based Conditions', 'Human and Social Capital', "Economic Activity"],
                      'value': [0, 0, 0],
-                     'subjects':[['Environmental Health', 'Food and Physical Health Security', 'Housing and Neighborhoods', "Transportation", "Access to Finance Institutions, Childcare, and Broadband", "Density of Innovation and Creation Organizations", "Density of Skill-building Centers"], ['Educational Attainment, current adults', 'Schooling Outcomes, current students', 'Transitional and Opportunity Youth', 'Social Networks', 'Social Cohesion'], ['Size of Local Economy', 'Standard of Living', 'Productivity', 'Jobs', 'Employment', "Unemployment", "Labor Force", "Earnings", "Household Income", "Poverty", "Budgetary Assistance", "Income Inequality", "Homeownership", "Banking", "Financial Resilience", "Patents", "Business Establishments", "Loans to Small Business"]]}
+                     'subjects':[['Environmental Health', 'Food and Physical Health Security', 'Housing and Neighborhoods', "Transportation", "Access to Finance Institutions, Childcare, and Broadband", "Density of Innovation and Creation Organizations", "Density of Skill-building Centers"], ['Educational Attainment, current adults', 'Schooling Outcomes, current students', 'Transitional and Opportunity Youth', 'Social Networks', 'Social Cohesion'], ['Size of Local Economy', 'Standard of Living', 'Productivity', 'Jobs', 'Employment', "Unemployment", "Labor Force", "Earnings", "Household Income", "Poverty", "Budgetary Assistance", "Income Inequality", "Homeownership", "Access to Wealth", "Financial Resilience", "Patents", "Business Establishments", "Loans to Small Business"]]}
 df_pillarsintro = pd.DataFrame(data=dict_pillarsintro)
 hover_pillarsintro = ["<br>".join(subject) for subject in df_pillarsintro['subjects']]
 
@@ -140,7 +140,7 @@ pillarcirclesfig.update_layout(
     yaxis_title=None,
     showlegend=False,
 )
-pillarcirclesfig.update_layout(height=310, plot_bgcolor='white', font=dict(size=17))
+pillarcirclesfig.update_layout(height=311, plot_bgcolor='white', font=dict(size=17))
 
 
 pillar_circles = dcc.Graph(figure=pillarcirclesfig,config={'displayModeBar': False})

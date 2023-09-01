@@ -369,12 +369,42 @@ color_e = "#209bcf"
 
 color_red = "rgba(226,126,123,255)"
 
+dict_pillarsintro = {'pillar': ['Place-based Conditions', 'Human and Social Capital', "Economic Activity"],
+                     'value': [0, 0, 0],
+                     'subjects':[['Environmental Health', 'Food and Physical Health Security', 'Housing and Neighborhoods', "Transportation", "Access to Finance Institutions, Childcare, and Broadband", "Density of Innovation and Creation Organizations", "Density of Skill-building Centers"], ['Educational Attainment, current adults', 'Schooling Outcomes, current students', 'Transitional and Opportunity Youth', 'Social Networks', 'Social Cohesion'], ['Size of Local Economy', 'Standard of Living', 'Productivity', 'Jobs', 'Employment', "Unemployment", "Labor Force", "Earnings", "Household Income", "Poverty", "Budgetary Assistance", "Income Inequality", "Homeownership", "Access to Wealth", "Financial Resilience", "Patents", "Business Establishments", "Loans to Small Business"]]}
+df_pillarsintro = pd.DataFrame(data=dict_pillarsintro)
+
+pillarcirclesfig = px.scatter(df_pillarsintro, x='pillar', y='value', color='pillar',
+                     color_discrete_map={
+                         "Place-based Conditions": color_p,
+                         "Human and Social Capital": color_hsc,
+                         "Economic Activity": color_e
+                     },
+                     opacity=0.85)
+pillarcirclesfig.update_traces(marker=dict(size=60, line=dict(width=1.5, color='DarkSlateGrey')))
+pillarcirclesfig.update_xaxes(showgrid=False,
+                 )
+pillarcirclesfig.update_yaxes(showgrid=False,
+                 zeroline=False,
+                 showticklabels=False,
+                 )
+pillarcirclesfig.layout.xaxis.fixedrange = True
+pillarcirclesfig.layout.yaxis.fixedrange = True
+pillarcirclesfig.update_layout(
+    title=None,
+    xaxis_title=None,
+    yaxis_title=None,
+    showlegend=False,
+)
+pillarcirclesfig.update_layout(height=250, plot_bgcolor='white', font=dict(size=17))
+pillarcirclesfig.update_traces(hovertemplate = None, hoverinfo = "skip")
+
+
 
 df_pillars = pd.merge(df_nedpillars_fips, df_nedpillars_rank, on='county', how='inner')
 df_pillars = df_pillars.round(1)
 
 df_subjects = df_tot_subj_aggs.copy()
-#df_subjects.insert(1, 'fips', df_fipscounty.iloc[:,0])
 
 df_topics = df_tot_aggs.copy()
 df_topics.insert(1, 'fips', df_fipscounty.iloc[:,0])
@@ -406,9 +436,33 @@ distributions of wealth and opportunity. Nevertheless, aside from few local exam
 The New Economic Development (NED) tool does just that.
 '''
 
+ned_text1 = '''
+NED combines frontier interdisciplinary research with key field-derived learning to represent the drivers of inclusive economic development through three distinct Pillars.
+'''
+
+ned_text2place = '''
+...refer to the physical foundation upon which people live. Health, 
+environment, and access are factored along with other metrics of thriving communities.'''
+
+ned_text2humancap = '''
+...cover the enablers of development given by individual 
+education to social affiliation. This includes training pipelines and the strength of networks.
+'''
+
+ned_text2econact = '''
+...represents material and financial prosperity, potential, 
+and resilience. This is the 'size of the local economic pie' and how its 'slices' are distributed.
+'''
+
+intro_text2 = '''
+Crucially, the balance of indicator levels across these three Pillars is what determines a place's standing. *Delve deeper in the [About this tool](/about) page.*
+'''
+intro_text3 = '''
+From granular census, business, workforce, and social network data, evaluate local economic development across California's 58 counties by selecting the [State](#toCA) or the [Individual County](#toCounty) views below.
+'''
 
 choro_text1 = '''
-Explore NED throughout California's 58 counties. An aggregation of the Pillars into a general NED score is presented for comparison to common development metrics like Gross Regional Product or the Human Development Index.
+An aggregation of the Pillars into a general NED score is presented for comparison to common development metrics like Gross Regional Product or the Human Development Index.
 
 *Select a dimension from the menu below, and use the buttons above it to toggle between views.*
 '''
@@ -423,11 +477,55 @@ Analyze individual counties' performance the NED way through the three subsequen
 *Ex: significant differences within Pillars (Lassen, Economic Activity) highlight the part of the ecosystem that local policies can focus.*
 
 * Finally, examine the distribution of Topics (iii., below) rankings to see specifically where counties specialize, and where they are weaker.  
-*Ex: Skewed spreads (San Francisco) evidence the need for targeted approaches to comparatively improve local NED, whereas more concentrated lower rankings (Imperial) suggest a comprehensive economic development plan is required.*
+*Ex: Skewed higher spreads (San Francisco) evidence the need for targeted approaches to comparatively improve local NED, whereas more concentrated lower rankings (Imperial) or widespread scores (Amador) suggest a comprehensive economic development plan is required.*
 
 *Start by selecting a county using the dropdown menu below, and hover over the figures for more information.*
 '''
 
+modal = html.Div(
+    [
+        dbc.Button("The NED Approach", id="open", n_clicks=0, color="dark", outline=True, className="me-1"),
+        dbc.Modal(
+            [
+                dbc.ModalHeader(dbc.ModalTitle("Inclusive, Sustainable, Smart Economic Growth")),
+                dbc.ModalBody([
+                    dbc.Row(
+                        [
+                            dbc.Col(dcc.Markdown(ned_text1), width = {"size":"auto"})
+                        ]
+
+                    ),
+                    dbc.Row(
+                        [
+                            dcc.Graph(figure=pillarcirclesfig,config={'displayModeBar': False})
+                        ]
+                    ),
+
+                    dbc.Row(
+                        [
+                            dbc.Col(dcc.Markdown(ned_text2place), width={"size": 4}),
+                            dbc.Col(dcc.Markdown(ned_text2humancap), width={"size": 4}),
+                            dbc.Col(dcc.Markdown(ned_text2econact), width={"size": 4}),
+                        ]
+                    ),
+                    dbc.Row(
+                        [
+                            dbc.Col(dcc.Markdown('''The NED Pillars (noted with an *i.* for clarity) are made up of Subjects (*ii.*) that cover each's relevant categories. These are themselves composed of Topics (*iii.*), composites of measured data.'''))
+                        ]
+                    ),
+                    dbc.Row(
+                        [
+                            dbc.Col(dcc.Markdown(intro_text2), width = {"size":"auto"})
+                        ]
+                    ),
+                ]),
+            ],
+            id="modal",
+            size="xl",
+            is_open=False,
+        ),
+    ], className="d-grid gap-2 d-md-flex justify-content-md-center",
+)
 
 
 chorotitle = dcc.Markdown(children='')
@@ -503,6 +601,10 @@ chorotabMean_e = '''
 Agglomeration economies . For instance, we can see that play out in the wine-producing counteis of Northern California. Difference with Ag elsewhere is that:
 '''
 
+closing_text = '''
+*Continue onto the [About this tool](/about) page to read more about the NED approach and potential applications of this tool, and explore the [Methodology](/methodology) for the technical decisions that went into its development.*
+'''
+
 countytitle = dcc.Markdown(children='')
 county_pillarsgraph = dcc.Graph(figure={}, config={'modeBarButtonsToRemove': ['select', 'lasso2d']})
 county_flower = dcc.Graph(figure={}, config={'modeBarButtonsToRemove': ['zoom', 'select', 'lasso2d']})
@@ -510,7 +612,6 @@ county_dropdown = dcc.Dropdown(options= countymenu,
                               value='Alameda',
                               clearable=False)
 county_top5bot5graph = dcc.Graph(figure={}, config={'modeBarButtonsToRemove': ['select', 'lasso2d']})
-pillars_correlationgraph = dcc.Graph(figure={})
 
 #------------------------------------------------------
 # Radio items
@@ -552,10 +653,13 @@ dash.register_page(
 layout = dbc.Container([
     html.H1('The NED Interactive Tool', style={'fontsize': '48px', 'text-align': 'center', 'color': "#d8534f"}),
     html.Br(),
-    dcc.Markdown(intro_text),
+    dbc.Row([dcc.Markdown(intro_text)]),
+    dbc.Row([modal]),
+    html.Br(),
+    dbc.Row([dcc.Markdown(intro_text3, id = "toCA")]),
     html.Br(),
 #------------
-    html.H3("California State View", style={'fontsize': '24px', 'text-align': 'left', 'color': 'rgb(52,60,68)'}),
+    html.H3("California State View", style={'fontsize': '24px', 'text-align': 'left', 'color': 'rgb(52,60,68)'}, id="ca"),
     dcc.Markdown(children=choro_text1),
     dbc.Row(
         [
@@ -592,10 +696,10 @@ layout = dbc.Container([
     ),
     html.Br(),
     dbc.Row([choro_tabs]),
-    html.Br(),
+    html.Br(id = "toCounty"),
     html.Br(),
 #------------
-    html.H3('County Analysis', style={'fontsize': '24px', 'text-align': 'left', 'color': 'rgb(52,60,68)'}),
+    html.H3('County Analysis', style={'fontsize': '24px', 'text-align': 'left', 'color': 'rgb(52,60,68)'}, id="county"),
     dcc.Markdown(children=county_text),
     dbc.Row([
         dbc.Col([county_dropdown], width=3)
@@ -614,12 +718,24 @@ layout = dbc.Container([
     ], justify='center'),
     html.Br(),
 #------------
+    html.Br(),
+    dcc.Markdown(children=closing_text),
+    html.Br(),
 #    footerbar
 ], fluid=False, className="dbc")
 
 
 #-----------------------------------------------------------------------------------------------------------------------
 #Allows components to interact
+@callback(
+    Output("modal", "is_open"),
+    Input("open", "n_clicks"),
+    State("modal", "is_open"),
+)
+def toggle_modal(n1, is_open):
+    if n1:
+        return not is_open
+    return is_open
 
 @callback(     # number of outputs must equal number of returns below
     Output(choro_graph, 'figure'),
