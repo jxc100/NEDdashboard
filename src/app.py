@@ -21,7 +21,7 @@ linksbar = dbc.Row(
         dbc.Col(dbc.DropdownMenu(
             children=[
                 dbc.DropdownMenuItem("NED Tool", href='/'),
-                dbc.DropdownMenuItem("About this tool", href='/about'),
+                dbc.DropdownMenuItem("About this tool", href='/about'), #external_link='True', target="_blank"),
                 dbc.DropdownMenuItem("Methodology", href='/methodology'),
             ],
             nav=True,

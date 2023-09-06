@@ -105,43 +105,49 @@ There are three main avenues of work that the NED tool opens up:
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Build components
-dict_pillarsintro = {'pillar': ['Place-based Conditions', 'Human and Social Capital', "Economic Activity"],
-                     'value': [0, 0, 0],
-                     'subjects':[['Environmental Health', 'Food and Physical Health Security', 'Housing and Neighborhoods', "Transportation", "Access to Finance Institutions, Childcare, and Broadband", "Density of Innovation and Creation Organizations", "Density of Skill-building Centers"], ['Educational Attainment, current adults', 'Schooling Outcomes, current students', 'Transitional and Opportunity Youth', 'Social Networks', 'Social Cohesion'], ['Size of Local Economy', 'Standard of Living', 'Productivity', 'Jobs', 'Employment', "Unemployment", "Labor Force", "Earnings", "Household Income", "Poverty", "Budgetary Assistance", "Income Inequality", "Homeownership", "Access to Wealth", "Financial Resilience", "Patents", "Business Establishments", "Loans to Small Business"]]}
-df_pillarsintro = pd.DataFrame(data=dict_pillarsintro)
-hover_pillarsintro = ["<br>".join(subject) for subject in df_pillarsintro['subjects']]
+pillar_subjects = [ ['Environmental Health', 'Food and Physical Health Security', 'Housing',
+                    "Transportation", "Access to Banking, Childcare, and Broadband",
+                    "Innovation and Creation Institutions", "Skill-building"],
+                   ['Educational Attainment', 'Schooling Outcomes', 'Opportunity Youth',
+                    'Social Networks', 'Social Cohesion'],
+                   ['Size of Local Economy', 'Standard of Living', 'Productivity', 'Jobs',
+                    'Employment', "Unemployment", "Labor Force Participation", "Earnings",
+                    "Household Income", "Poverty", "Budgetary Assistance", "Income Inequality",
+                    "Homeownership", "Banking", "Financial Resilience", "Patents", "Businesses",
+                    "Small Business Loans"]
+                 ]
+# Join the strings for each pillar with <br> - this is for hover-text, one subject per line
+pillar_subjects_formatted = ["<br>".join(subject) for subject in pillar_subjects]
+# Make a dataframe with three columns - pillar string, value of zero to plot as circle, subjects string (formatted)
+df_pillarsintro = pd.DataFrame({'pillar': ['Place-based Conditions', 'Human and Social Capital', "Economic Activity"],
+                               'value': [0, 0, 0],
+                               'subjects': pillar_subjects_formatted,
+                               })
 
 pillarcirclesfig = px.scatter(df_pillarsintro, x='pillar', y='value', color='pillar', #template = "lux",
-                     color_discrete_map={
-                         "Place-based Conditions": color_p,
-                         "Human and Social Capital": color_hsc,
-                         "Economic Activity": color_e
-                     },
-                     opacity=0.85,
-                     #hover_name='pillar',
-                     hover_data={'pillar': False,
-                                 'value': False,
-                                 'Subject': hover_pillarsintro,
+                                 color_discrete_map={
+                                     "Place-based Conditions": color_p,
+                                     "Human and Social Capital": color_hsc,
+                                     "Economic Activity": color_e
                                  },
-
-                     )
+                                 custom_data='subjects',          # This column is used as-is for hover text
+                                 )
 pillarcirclesfig.update_traces(marker=dict(size=60, line=dict(width=1.5, color='DarkSlateGrey')),
-                              # customdata = np_pillarsintro,
-                              # hovertemplate=("Subjects: %{customdata[1]}")                   ##################################################
-                  )
-pillarcirclesfig.update_xaxes(showgrid=False,
-                 )
+                              name="",                        # suppresses the extra text outside hover-text boxes
+                              hovertemplate="%{customdata}",  # formatted text in the hover-text boxes
+                              )
+pillarcirclesfig.update_xaxes(showgrid=False)
 pillarcirclesfig.update_yaxes(showgrid=False,
-                 zeroline=False,
-                 showticklabels=False,
-                 )
+                             zeroline=False,
+                             showticklabels=False,
+                             )
 pillarcirclesfig.layout.xaxis.fixedrange = True
 pillarcirclesfig.layout.yaxis.fixedrange = True
 pillarcirclesfig.update_layout(
-    title=None,
-    xaxis_title=None,
-    yaxis_title=None,
-    showlegend=False,
+   title=None,
+   xaxis_title=None,
+   yaxis_title=None,
+   showlegend=False,
 )
 pillarcirclesfig.update_layout(height=311, plot_bgcolor='white', font=dict(size=17))
 
