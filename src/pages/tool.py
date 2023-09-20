@@ -1054,6 +1054,12 @@ def update_counties(county_selected):
         xaxis_title="Rank",
         yaxis_title="Frequency",
         legend_title="Pillar",
+#         legend = dict(
+#             orientation = "h",
+# #            yanchor = "bottom",
+# #            xanchor = "center",
+# #            xref = 'container'
+#         )
     )
     fig_county5.update_layout(height=400, plot_bgcolor=color_graphbg)
     fig_county5.layout.xaxis.fixedrange = True

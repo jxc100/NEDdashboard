@@ -93,13 +93,13 @@ They defined the range of what a quality life was, one with equitable opportunit
 '''
 
 futurework_text1 = '''
-As this work develops, the aim remains to raise public awareness and provide local and regional policymakers with a means to make evidence-based decisions in the unprecedented (and pressing), beyond-GDP context wihtout a clear framework that still needs to factor new vocies and insights.
+As this work develops, the aim remains to provide local and regional policymakers with a means to make evidence-based decisions about inclusive local economic development.
 
 There are three main avenues of work that the NED tool opens up:
 
-1. Academic research to understand the significance of the determinants of inclusive local and regional economic development
-2. Applying the NED tool to a variety of other studies to provide broader context of community impact and status given specific decisions
-3. Informing social investors and entrepreneurs general investment about where to benefit from funds, and why
+1. Academic research to understand the determinants of inclusive local and regional economic development.
+2. Applying the NED tool to a variety of other studies to provide the ecosystem context and impact following specific decisions.
+3. Informing social investors and entrepreneurs about the places most in need of, or most poised to benefit from funds, and why.
 '''
 
 
