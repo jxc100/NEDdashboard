@@ -149,7 +149,6 @@ df_tot_subj_dict = {**df_p_subj_dict, **df_hsc_subj_dict, **df_e_subj_dict}
 df_totgraph_dict = {**df_pgraph_dict, **df_hscgraph_dict, **df_egraph_dict}
 df_totgraph_subj_dict = {**df_pgraph_subj_dict, **df_hscgraph_subj_dict, **df_egraph_subj_dict}
 
-
 # NORMALISATION ROUTINE
 
 # For normalisation of positive components (life expectancy, higher the better), use Min-max (x-min)/(max-min)
@@ -313,7 +312,6 @@ df_nedscore_fips.insert(1, 'fips', df_fipscounty.iloc[:,0])
 
 df_nedpillars = pd.merge(df_nedscore, df_pillars, on='county', how='inner')
 df_nedpillars_fips = pd.merge(df_nedscore_fips, df_pillars, on='county', how='inner')
-
 
 # Rankings for topics
 
@@ -493,7 +491,7 @@ Analyze individual counties' performance the NED way through the three subsequen
 3. Finally, examine the distribution of Topics (iii., below) rankings to see specifically where counties specialize, and where they are weaker.  
 *Ex: Skewed higher spreads (San Francisco) evidence the need for targeted approaches to comparatively improve local NED, whereas more concentrated lower rankings (Imperial) or widespread scores (Amador) suggest a comprehensive economic development plan is required.*
 
-*Start by selecting a county using the dropdown menu below, and hover over the figures for more information.*
+*Start by selecting a county using the dropdown menu below, and hover over the figures for more information. For simplification, *Place-based Conditions*, *Human and Social Capital*, and *Economic Activity* will be respectively shortened to *PbC*, *HSC*, and *EA*.*
 '''
 
 modal = html.Div(
@@ -764,6 +762,9 @@ def toggle_modal(n1, is_open):
     Input(radio_mapbar, 'value'),
     Input(radio_alpharank, 'value'),
 )
+
+
+
 def update_ca(choro_selected, radioitem_mapbar, radioitem_alpharank):
 
 
@@ -797,6 +798,7 @@ def update_ca(choro_selected, radioitem_mapbar, radioitem_alpharank):
             title="Score",
         ),
     )
+    fig_choro.update_traces(hovertemplate='%{hovertext}: %{z:.1f}<extra></extra>')
 
     if choro_selected == 'NED':
         pillar_color = color_NED
@@ -834,6 +836,7 @@ def update_ca(choro_selected, radioitem_mapbar, radioitem_alpharank):
             selected=dict(marker=dict(color=pillar_color)),
             unselected=dict(marker=dict(color=pillar_color, opacity=0.6)),
         )
+    fig_cabars.update_traces(hovertemplate='%{x}: %{y:.1f}<extra></extra>')
 
     if radioitem_mapbar == 'map':
         fig_ca = fig_choro
@@ -905,58 +908,27 @@ def update_counties(county_selected):
         marker_line_color="rgba(26,26,26,255)",
         marker_line_width=1,
         opacity=0.8,
-        # hovertemplate=
-        # "<b>%{Subject}</b><br><br>" +
-        # f"{subject_slice}<br>" +
-        # "<extra></extra>",
+        hoverinfo = 'all',
+        hovertemplate='%{custom_name}: %{r}<extra></extra>',
+        #customdata=[df_totgraph_subj_dict[i] for i in range(len(theta9))],  # Pass custom data for custom_name
     ))
     fig_subjflower.add_trace(go.Scatterpolar(
         r= [NED_wavg.round(1), NED_wavg.round(1),NED_wavg.round(1),NED_wavg.round(1),NED_wavg.round(1),NED_wavg.round(1),NED_wavg.round(1),NED_wavg.round(1),NED_wavg.round(1),NED_wavg.round(1),],
         theta=[0, 40, 80, 120, 160, 200, 240, 280, 320, 360],
         mode='lines',
-        name='Place-based Conditions average',
+        name='NED avg.',
         line_color=color_red,
         line_dash='dot',
         line_width = 2,
         line_shape = 'spline',
-        line_smoothing = 1.3
+        line_smoothing = 1.3,
+        hoverinfo='text',  # Set hoverinfo to 'none' for this trace
+        hovertext=['NED Score CA avg.', 'NED Score CA avg.', 'NED Score CA avg.', 'NED Score CA avg.', 'NED Score CA avg.', 'NED Score CA avg.', 'NED Score CA avg.', 'NED Score CA avg.', 'NED Score CA avg.', 'NED Score CA avg.'],
     ))
-    # fig_subjflower.add_trace(go.Scatterpolar(
-    #     r= [p_wavg.round(1), p_wavg.round(1)],
-    #     theta=[0, 40],
-    #     mode='lines',
-    #     name='Place-based Conditions average',
-    #     line_color=color_red,
-    #     line_dash='dot',
-    #     line_width = 2,
-    #     line_shape = 'spline',
-    #     line_smoothing = 1.3
-    # ))
-    # fig_subjflower.add_trace(go.Scatterpolar(
-    #     r= [hsc_wavg.round(1), hsc_wavg.round(1)],
-    #     theta=[80, 120],
-    #     mode='lines',
-    #     name='Human and Social Capital average',
-    #     line_color=color_red,
-    #     line_dash = 'dot',
-    #     line_width = 2,
-    #     line_shape = 'spline',
-    #     line_smoothing = 1.3
-    # ))
-    # fig_subjflower.add_trace(go.Scatterpolar(
-    #     r= [e_wavg.round(1), e_wavg.round(1).round(1), e_wavg.round(1), e_wavg.round(1), e_wavg.round(1)],
-    #     theta=[160, 200, 240, 280, 320],
-    #     mode='lines',
-    #     name='Economic Activity average',
-    #     line_color=color_red,
-    #     line_dash='dot',
-    #     line_width=2,
-    #     line_shape='spline',
-    #     line_smoothing=1.3
-    # ))
+
     fig_subjflower.update_layout(
         grid=None,
-        showlegend = False,
+        showlegend = True,
         template=None,
         polar=dict(
             radialaxis=dict(range=[0, 8.5], showticklabels=False, ticks=''),
@@ -1010,19 +982,19 @@ def update_counties(county_selected):
 
     for index in df_top5bottom5['index']:
         if index in df_e_dict:
-            df_top5bottom5.loc[df_top5bottom5['index'] == index, 'pillars'] = 'Economic Activity'
+            df_top5bottom5.loc[df_top5bottom5['index'] == index, 'pillars'] = 'EA'
         elif index in df_hsc_dict:
-            df_top5bottom5.loc[df_top5bottom5['index'] == index, 'pillars'] = 'Human and Social Capital'
+            df_top5bottom5.loc[df_top5bottom5['index'] == index, 'pillars'] = 'HSC'
         else:
-            df_top5bottom5.loc[df_top5bottom5['index'] == index, 'pillars'] = 'Place-based Conditions'
+            df_top5bottom5.loc[df_top5bottom5['index'] == index, 'pillars'] = 'PbC'
 
     fig_county5 = px.scatter(df_top5bottom5, x='rank_neg', y='zeros', color='pillars',
                      color_discrete_map={
-                         "Place-based Conditions": color_p,
-                         "Human and Social Capital": color_hsc,
-                         "Economic Activity": color_e
+                         "PbC": color_p,
+                         "HSC": color_hsc,
+                         "EA": color_e
                      },
-                     category_orders={"pillars": ["Place-based Conditions", "Human and Social Capital", "Economic Activity"]},
+                     category_orders={"pillars": ["PbC", "HSC", "EA"]},
                      # opacity=0.85,
                      hover_name='index',
                      hover_data={'rank_neg': False,  # remove from hover data
