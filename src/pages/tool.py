@@ -334,8 +334,8 @@ df_e_subj_rank = df_e_subj_aggs.set_index('county').transform(pd.Series.rank, 0,
                                                               na_option='bottom').astype(int).reset_index()
 
 # total
-df_first2_rank = pd.merge(df_p_rank, df_hsc_rank, on='county', how='inner')
-df_tot_rank = pd.merge(df_first2_rank, df_e_rank, on='county', how='inner')
+# df_first2_rank = pd.merge(df_p_rank, df_hsc_rank, on='county', how='inner')
+# df_tot_rank = pd.merge(df_first2_rank, df_e_rank, on='county', how='inner')
 
 df_first2_subj_rank = pd.merge(df_p_subj_rank, df_hsc_subj_rank, on='county', how='inner')
 df_tot_subj_rank = pd.merge(df_first2_subj_rank, df_e_subj_rank, on='county', how='inner')
