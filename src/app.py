@@ -107,4 +107,7 @@ def toggle_navbar_collapse(n, is_open):
 #Run the app
 if __name__ == '__main__':
 #   app.run_server(debug=False)
-   app.run(debug=True, host='127.0.0.1', port=8061)
+# Note - debug=True casues app,py to reload, causing some double-executions of global code.
+#        Prevent this with use_reloader=False (but lose the auto-reloading functionality)
+#   app.run(debug=True, host='127.0.0.1', port=8061)
+   app.run_server(debug=True, host='127.0.0.1', port=8061, use_reloader=True)
